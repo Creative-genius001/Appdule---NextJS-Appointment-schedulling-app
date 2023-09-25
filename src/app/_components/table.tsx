@@ -32,9 +32,9 @@ const Table: React.FC<DataProps> = ({data}): JSX.Element  => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data?.map((appt)=>{
+                            {data?.map((appt, index)=>{
                                 return(
-                            <tr>
+                            <tr key={index}>
                                 <td className="id">
                                     <p>{appt.id}</p>
                                 </td>

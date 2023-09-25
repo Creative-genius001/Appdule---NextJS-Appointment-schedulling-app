@@ -1,0 +1,32 @@
+.hero_section{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+   
+    /* background-color: red; */
+}
+
+Input{
+    width: 100%;
+    height: 46px;
+    outline: none;
+    padding: 7px 12px;
+    font-size: 1rem;
+    border-radius: 12px;
+    background-color: rgb(243, 243, 243);
+}
+
+Input:focus{
+    border: 2px solid #26aca767;
+    outline: none;
+    appearance: none;
+}
+
+.img_section{
+    border: 10px solid black;
+}
+
+label{
+    color: #121212;
+}
