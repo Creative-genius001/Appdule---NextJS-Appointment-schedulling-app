@@ -21,9 +21,9 @@ const Page = () => {
             {/* <div className= "hero-img w-[45%] h-[100vh] rounded-lg bg-[#772929] ">
                 <Image alt="frontimage" src={doc} className="img w-[100%] h-[100%] object-contain rounded-lg "/>
             </div> */}
-            <div className="main-container w-[55%] h-[100vh] flex flex-col justify-center items-center bg-[white] ">
+            <div className="main-container w-[55%] sm:w-screen h-[100vh] flex flex-col justify-center items-center bg-[white] ">
                 
-                <div className="main-container2 w-[50%] mx-auto">
+                <div className="main-container2 w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Signup</h1> 
                     {/* <p className="text-[1rem] text-dark ">Please enter your details to login.</p>   */}
                 <div className="mt-4">
@@ -49,7 +49,7 @@ const Page = () => {
                         <input className="button" type="submit" value='Signup' />
                     </form>
                     <div className="mt-3">
-                        <p className="text-center text-dark mt-2 text-base ">Already have an account? <Link href={"/auth/signup"}><span className="font-semibold text-lightblue ">Login</span></Link></p>
+                        <p className="text-center text-dark mt-2 text-base ">Already have an account? <Link href={"/auth/login"}><span className="font-semibold text-lightblue ">Login</span></Link></p>
                     </div>
                 </div>
                 </div>  
