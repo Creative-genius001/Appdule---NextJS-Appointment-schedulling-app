@@ -21,19 +21,19 @@ const Page = () => {
             {/* <div className= "hero-img w-[45%] h-[100vh] rounded-lg bg-[#772929] ">
                 <Image alt="frontimage" src={doc} className="img w-[100%] h-[100%] object-contain rounded-lg "/>
             </div> */}
-            <div className="main-container w-[55%] sm:w-screen h-[100vh] flex flex-col justify-center items-center bg-[white] ">
+            <div className="main-container md:w-[55%] sm:w-screen h-[100vh] flex flex-col justify-center items-center bg-[white] ">
                 
-                <div className="main-container2 w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
+                <div className="main-container2 lg:w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Signup</h1> 
                     {/* <p className="text-[1rem] text-dark ">Please enter your details to login.</p>   */}
                 <div className="mt-4">
                     <form onSubmit={handleSubmit}>
                         <div className="flex w-full gap-3">
-                            <div className="flex flex-col">
+                            <div className="flex flex-col w-full">
                                 <label className="text-base font-semibold mb-1 ">Firstname</label>
                                 <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} type="text" placeholder="Firstname"></input>
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex flex-col w-full">
                                 <label className="text-base font-semibold mb-1 ">Lastname</label>
                                 <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} type="text" placeholder="Lastname"></input>
                             </div>
