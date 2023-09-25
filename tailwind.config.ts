@@ -12,7 +12,8 @@ const config: Config = {
 			darkpurple: "#7F56DA",
 			darkblue: "#0F2851",
 			darkgrey: "#F5F5F5",
-      dark: "#121212"
+      dark: "#121212",
+      darkSecondary: "#fafafa"
 		},
 		screens: {
 			sm: "270px",

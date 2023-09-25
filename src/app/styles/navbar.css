@@ -1,0 +1,23 @@
+
+li{
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+li .active{
+    color: #0895a3;
+}
+
+li:hover{
+    background-color: rgb(247, 247, 247);
+}
+
+.nav-container{
+    filter: drop-shadow(-3px 0px 4px rgba(0, 0, 0, 0.05));
+    background-color: white;
+}
+
+#nav-icon{
+    color: #0895a3;
+    font-size: 1.4rem;
+}

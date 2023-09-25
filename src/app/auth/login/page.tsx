@@ -3,6 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
+import { Login } from "@/app/_services/auth.service";
+import { object, string, number, date, InferType } from 'yup';
+// import { yupResolver } from "@hookform/resolvers/yup"
+import { useForm } from "react-hook-form"
 import '../../styles/auth.css'
 
 
@@ -11,8 +15,35 @@ const Page = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const handleSubmit = () => {
+    let userSchema = object({
+        email: string().required('Email is required').email('Must be a valid email'),
+        password: string().required('Password is required').min(8, 'Minimum of 8 characters')
+    });
 
+//     const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm({
+//     resolver: yupResolver(schema),
+//   })
+//   const onSubmit = (data) => console.log(data)
+
+
+    const handleSubmit = async(email: string, password: string) => {
+       await userSchema.validate({email, password})
+                        .then((user)=>{
+                            login(user.email, user.password)
+                        }) 
+                        .catch((err)=>{
+                            console.log(err)
+                        })
+        
+    }
+
+    async function login(email: string, password: string){
+        await Login(email, password)
+        // console.log(res)
     }
    
     return ( 
@@ -27,16 +58,19 @@ const Page = () => {
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Login</h1> 
                     {/* <p className="text-[1rem] text-dark ">Please enter your details to login.</p>   */}
                 <div className="mt-4">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={(e)=> {
+                        e.preventDefault()
+                        handleSubmit(email, password)
+                        }}>
                         <div className="flex flex-col">
-                            <label className="text-base font-semibold mb-1 ">Email</label>
-                            <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} type="text" placeholder="Enter your email"></input>
+                            <label className="text-base font-medium mb-1 ">Email</label>
+                            <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} type="email" placeholder="Enter your email"></input>
                         </div>
                         <div className="flex flex-col mt-3">
-                            <label className="text-base font-semibold mb-1">Password</label>
+                            <label className="text-base font-medium mb-1">Password</label>
                             <input type='password' onChange={(e: ChangeEvent<HTMLInputElement>)=> setPassword(e.target.value)} placeholder="Enter your password"></input>
                         </div>
-                        <Link href={"/forgot-password"}><p className="font-semibold text-lightblue text-right mt-2">Forgot Password?</p></Link>
+                        <Link href={"/forgot-password"}><p className="font-medium text-lightblue text-right mt-2">Forgot Password?</p></Link>
                         <input className="button" type="submit" value='Login' />
                     </form>
                     <div className="mt-3">

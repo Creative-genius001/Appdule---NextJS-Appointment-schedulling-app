@@ -96,9 +96,9 @@ body {
   width: 100%;
 }
 
-.main-card{
+/* .main-card{
   filter: drop-shadow(-3px 0px 4px rgba(0, 0, 0, 0.05));
-}
+} */
 
 .appt-tab li{
     display: inline-block;
@@ -151,6 +151,7 @@ tbody tr td{
     padding: 5px 10px;
     display: inline-block;
     border-radius: 8px;
+    font-size: .7rem;
 }
 
 .status.completed p {

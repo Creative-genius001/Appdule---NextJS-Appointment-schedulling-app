@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
+import { object, string, number, date, InferType } from 'yup';
 import '../../styles/auth.css'
 
 
@@ -10,6 +11,14 @@ const Page = () => {
     const [error, setError] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
+    let userSchema = object({
+        firstName: string().required(),
+        lastName: number().required().positive().integer(),
+        email: string().email(),
+        password: string().required().min(8, 'Minimum of 8 characters')
+    });
+
 
     const handleSubmit = () => {
 
