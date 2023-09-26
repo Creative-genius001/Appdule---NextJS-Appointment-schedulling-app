@@ -1,15 +1,24 @@
 
 li{
-    padding: 12px 20px;
+    padding: 12px 0;
     cursor: pointer;
+    
 }
 
-li .active{
+#link{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    color: #5a5a5a;
+}
+
+.active #link {
     color: #0895a3;
 }
 
-li:hover{
-    background-color: rgb(247, 247, 247);
+#link:hover{
+    color: #121212 
 }
 
 .nav-container{
@@ -20,4 +29,8 @@ li:hover{
 #nav-icon{
     color: #0895a3;
     font-size: 1.4rem;
+}
+
+.drop-down{
+    filter: drop-shadow(-3px 0px 4px rgba(0, 0, 0, 0.05)); 
 }
