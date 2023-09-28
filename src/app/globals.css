@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -108,16 +109,11 @@ body {
     font-size: 1.1rem;
 }
 
-.table-container{
-    overflow: auto;
-    background-color: white;
-    border-radius: 7px;
-}
-
 .table-container p{
     font-size: 14px;
     font-weight: 400;
     color: #6D6D6D;
+    white-space: nowrap;
 }
 
 .table-container i{
@@ -125,8 +121,17 @@ body {
     cursor: pointer;
 }
 
+.table-container{
+  overflow-x: auto;
+}
+
+thead, tbody{
+  width: calc(100% / 5);
+}
+
 table{
     border-collapse: collapse;
+    width: 100%;
 
 }
 
@@ -143,8 +148,16 @@ thead td{
     line-height: 17px;
 }
 
+thead{
+  background-color: #ececec;
+}
+
 tbody tr td{
     padding: 15px 15px;
+}
+
+tbody tr:hover{
+  background-color: #fafafa;
 }
 
 .status p{
@@ -179,11 +192,11 @@ tbody tr td{
 
 
   @media screen and (max-width:768px) and (min-width: 250px) {
-    .table-container{
+    /* .table-container{
       display: flex;
       flex-direction: column;
       height: 100%;
-    }
+    } */
     .ant-table-wrapper {
       flex: 1;
     }

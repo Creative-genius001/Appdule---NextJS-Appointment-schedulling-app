@@ -18,7 +18,7 @@ function Navbar() {
     const[dropDown, setDropDown] = useState<boolean>(false)
 
     return (
-            <div className='bg-[white] w-screen h-[130px] px-20 py-8 flex justify-between items-center'>
+            <div className='bg-[white] sticky top-0 left-0 w-screen h-[130px] px-20 py-8 flex justify-between items-center'>
                 <div className="logo-div">
                     <span className='font-bold text-[2.4rem] text-lightblue'>Appdule</span>
                 </div>

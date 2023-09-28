@@ -11,7 +11,7 @@ import Sidenav from '../_components/sidenav'
 
 function Page() {
   return (
-    <div className='bg-[#fafafa] text-dark pt-8 lg:px-[70px] sm:px-[20px] min-h-screen'>
+    <div className='bg-[#fafafa] text-dark w-screen pt-8 lg:px-[70px] sm:px-[20px] min-h-screen'>
       {/* Schedule appointment */}
       {/* <Navbar /> */}
       {/* <MobileNav /> */}
@@ -28,7 +28,7 @@ function Page() {
         <h1 className='lg:text-2xl sm:text-lg font-medium'>Upcomming Appointments</h1>
 
         <div className='appt-container'>
-          {/* <Table data={data}/> */}
+          <Table data={data}/>
         </div>
       </div>
 

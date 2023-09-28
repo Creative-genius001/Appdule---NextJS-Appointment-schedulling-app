@@ -20,8 +20,8 @@ const Table: React.FC<DataProps> = ({data}): JSX.Element  => {
     return ( 
         <>
             <div className="w-full mt-4 bg-[white] rounded-[7px]">
-                <div className="table-container w-full">
-                    <table className="lg:w-[80%] sm:w-full">
+                <div className="table-container lg:w-[100%] sm:w-full">
+                    <table className="">
                         <thead>
                             <tr>
                                 <td>Appointment ID</td>
