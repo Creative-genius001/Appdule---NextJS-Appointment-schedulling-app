@@ -8,10 +8,11 @@ import { object, string, number, date, InferType } from 'yup';
 // import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import '../../styles/auth.css'
+import Error from "@/app/_components/error";
 
 
 const Page = () => {
-    const [error, setError] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -42,12 +43,15 @@ const Page = () => {
     }
 
     async function login(email: string, password: string){
-        await Login(email, password)
-        // console.log(res)
+        const res = await Login(email, password)
+        if(res === 'Invalid email or password'){
+            setError(res)
+        }
     }
    
     return ( 
         <>
+        {error && <Error error={error} />}
         <div className='hero-section'>
             {/* <div className= "hero-img w-[45%] h-[100vh] rounded-lg bg-[#772929] ">
                 <Image alt="frontimage" src={doc} className="img w-[100%] h-[100%] object-contain rounded-lg "/>
