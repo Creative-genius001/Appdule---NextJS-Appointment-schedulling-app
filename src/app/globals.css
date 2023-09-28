@@ -185,6 +185,21 @@ tbody tr:hover{
 
 .textarea:hover{
   border: 2px solid #24b7b29f;
+  /* <button class="MuiButtonBase-root MuiPickersDay-root Mui-selected MuiPickersDay-dayWithMargin 
+  css-1u23akw-MuiButtonBase-root-MuiPickersDay-root" tabindex="0" type="button" role="gridcell" 
+  data-timestamp="1694127600000" aria-colindex="6" aria-selected="true">…</button> */
+}
+
+.css-jgls56-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: #0895a3 !important;
+}
+
+.css-1u23akw-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: #0895a3 !important;
+}
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
+  color: #0895a3 !important;
 }
 
  

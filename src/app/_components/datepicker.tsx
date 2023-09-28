@@ -12,12 +12,13 @@ function Datepicker() {
 
     return(
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker']}>
+            <DemoContainer components={['MobileDatePicker']}>
                 <MobileDatePicker
+                    className='datepicker'
                     defaultValue={dayjs(new Date())}
-                    sx={{width: '100%', borderColor: 'red'}}
+                    sx={{ width: '100%'}}
                     onChange={(newValue: any) => {
-                        newValue = dayjs(newValue).format('DD/MM/YYYY')
+                        newValue = dayjs(newValue).format('dddd, MMMM D, YYYY')
                         setDate(newValue)
                         console.log(date)
                     }}
