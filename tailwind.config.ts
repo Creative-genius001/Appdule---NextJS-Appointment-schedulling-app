@@ -18,7 +18,7 @@ const config: Config = {
 		},
 		screens: {
 			sm: "270px",
-			md: "640px",
+			md: "720px",
 			lg: "1024px",
 		},
     extend: {

@@ -1,9 +1,5 @@
 import { AppointmentData, data } from '../_data/data';
-import Image from "next/image";
-import Link from 'next/link';
-import png1 from '../../public/assets/01.png'
-import png3 from '../../public/assets/03.png'
-import { FC } from "react";
+import { MdDeleteOutline } from 'react-icons/md'
 
 
 interface DataProps {
@@ -48,7 +44,7 @@ const Table: React.FC<DataProps> = ({data}): JSX.Element  => {
                                     <p>{appt.status}</p>
                                 </td>
                                 <td className="action">
-                                    <span className=" text-lightblue cursor-pointer hover:underline ">Cancel</span>
+                                    <span className=" text-lightblue cursor-pointer text-[1.5rem]"><MdDeleteOutline /></span>
                                 </td>
                             </tr>
                                 )

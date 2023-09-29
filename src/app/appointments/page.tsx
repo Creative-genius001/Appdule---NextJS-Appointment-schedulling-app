@@ -26,11 +26,9 @@ const Page = () => {
     <>
         <div className='bg-darkSecondary h-screen  pt-8 lg:px-[70px] sm:px-[20px] w-screen'>
            <h1 className='lg:text-2xl sm:text-lg font-medium'>All Appointments</h1>
-            <div className='main-card w-full h-auto bg-[#ffffff] mt-8 rounded-[6px] p-8'>
               <div className='appt-container'>
                 <Table data={data}/>
               </div>
-            </div> 
         </div>      
     </> 
         );

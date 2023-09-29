@@ -32,7 +32,7 @@ function Page() {
       </div>
 
       {/* Appointment Schedule Tables */}
-      <div className='main-card w-full h-auto bg-[#ffffff] mt-8 rounded-[6px] p-8'>
+      <div className='main-card w-full h-auto bg-[#ffffff] mt-8 rounded-[6px] lg:p-8 sm:px-4 sm:py-8'>
         <h1 className='lg:text-2xl sm:text-lg font-medium'>Upcomming Appointments</h1>
 
         <div className='appt-container'>

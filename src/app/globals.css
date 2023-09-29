@@ -26,6 +26,13 @@ body {
 }
 
 @layer components {
+
+  .main{
+    height: 100vh;
+    background-color: #0895a3;
+    width: 100vw;
+  }
+
   .button {
     background-color: theme('colors.lightblue');
     margin-top: 20px;
