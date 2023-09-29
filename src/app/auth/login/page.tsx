@@ -3,13 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Login } from "@/app/_services/auth.service";
 import { object, string, number, date, InferType } from 'yup';
 // import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import '../../styles/auth.css'
 import Error from "@/app/_components/error";
+import { UserLoginResponse } from "@/app/models/user.model";
 
 
 const Page = () => {
@@ -17,6 +18,12 @@ const Page = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const router = useRouter();
+
+    useEffect(()=>{
+        const res: any = localStorage.getItem("utk");
+        const User = JSON.parse(res);
+        console.log(User)
+    },[])
 
     let userSchema = object({
         email: string().required('Email is required').email('Must be a valid email'),

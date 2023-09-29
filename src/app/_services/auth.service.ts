@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebase";
 import handleError from "../utils/errorhandler";
@@ -18,7 +18,7 @@ async function Signup(email: string, password: string, firstname: string, lastna
 }
 
 async function Login(email: string, password: string){
-    
+
     const res: UserCredential = await signInWithEmailAndPassword(auth, email, password)
     if(!res){
         throw new Error('Invalid Credentials');
@@ -29,6 +29,11 @@ async function Login(email: string, password: string){
     }
     localStorage.setItem('utk', JSON.stringify(User));
     return ({statusCode: 200})
+}
+
+async function Logout(){
+    await signOut(auth)
+    localStorage.removeItem('utk')
 }
 
 
