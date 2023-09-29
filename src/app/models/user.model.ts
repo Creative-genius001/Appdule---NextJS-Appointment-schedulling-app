@@ -1,5 +1,5 @@
-export interface UserLoginResponse {
-    email: string,
+export interface User {
+    email: string | null,
     firstName: string,
     lastName: string,
     user_id: string,

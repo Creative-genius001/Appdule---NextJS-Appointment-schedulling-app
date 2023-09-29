@@ -10,6 +10,7 @@ import { HiMiniArrowLeft } from 'react-icons/hi2'
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5'
 import { useRouter, usePathname } from 'next/navigation'
 import '@/app/styles/navbar.css'
+import { Logout } from '../_services/auth.service'
 
 
 function MobileNav(props: any) {
@@ -27,7 +28,7 @@ function MobileNav(props: any) {
                         <button onClick={()=> router.push('/settings/profile')} className='rounded-[20px] text-[white] font-semibold bg-lightblue px-4 py-1 text-sm   '>Details</button>
                     </div>
                     <div className='mb-3'>
-                      <h3 className='font-semibold text-2xl'>Ovie Ighosuakpo</h3>
+                      <h3 className='font-semibold text-2xl'>{props.user?.firstName} {props.user?.lastName}</h3>
                     </div>
                     <div>
                          <ul>
@@ -54,7 +55,7 @@ function MobileNav(props: any) {
                                 </div>
                                 </Link>
                             </li>
-                            <li>
+                            <li onClick={Logout}>
                                 <div id='link'>
                                     <IoLogOutOutline className="text-[1.6rem] " />
                                     <span>Logout</span>

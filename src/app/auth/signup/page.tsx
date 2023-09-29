@@ -2,26 +2,35 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { object, string, number, date, InferType } from 'yup';
 import '../../styles/auth.css'
+import { Signup } from "@/app/_services/auth.service";
+import { useRouter } from "next/navigation";
 
 
 const Page = () => {
+    const router = useRouter()
     const [error, setError] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
 
     let userSchema = object({
         firstName: string().required(),
-        lastName: number().required().positive().integer(),
+        lastName: string().required(),
         email: string().email(),
         password: string().required().min(8, 'Minimum of 8 characters')
     });
 
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const res = await Signup(email, password, firstName, lastName);
+        if(res.statusCode === 200){
+            router.push('/auth/login')
+        }
     }
    
     return ( 
@@ -36,15 +45,15 @@ const Page = () => {
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Signup</h1> 
                     {/* <p className="text-[1rem] text-dark ">Please enter your details to login.</p>   */}
                 <div className="mt-4">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
                         <div className="flex w-full gap-3">
                             <div className="flex flex-col w-full">
                                 <label className="text-base font-semibold mb-1 ">Firstname</label>
-                                <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} type="text" placeholder="Firstname"></input>
+                                <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setFirstName(e.target.value)} type="text" placeholder="Firstname"></input>
                             </div>
                             <div className="flex flex-col w-full">
                                 <label className="text-base font-semibold mb-1 ">Lastname</label>
-                                <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} type="text" placeholder="Lastname"></input>
+                                <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setLastName(e.target.value)} type="text" placeholder="Lastname"></input>
                             </div>
                         </div>
                         <div className="flex flex-col mt-3">

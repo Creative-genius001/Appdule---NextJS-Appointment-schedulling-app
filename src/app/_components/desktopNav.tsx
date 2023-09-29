@@ -10,6 +10,7 @@ import { HiMiniArrowLeft } from 'react-icons/hi2'
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5'
 import { useRouter, usePathname } from 'next/navigation'
 import '@/app/styles/navbar.css'
+import { Logout } from '../_services/auth.service'
 
 function DesktopNav(props: any) {
 
@@ -19,7 +20,7 @@ function DesktopNav(props: any) {
   return (
     <div className='drop-down bg-[white] w-[400px] h-[350px] rounded-[12px] absolute top-24 right-16 p-6 flex flex-col justify-start'>
                     <div className='mb-6 flex justify-between items-center'>
-                        <h3 className='font-semibold text-lg'>Ovie Ighosuakpo</h3>
+                        <h3 className='font-semibold text-lg'>{props.user?.firstName} {props.user?.lastName}</h3>
                         <button onClick={()=> router.push('/settings/profile')} className='rounded-[20px] text-[white] font-semibold bg-lightblue px-4 py-1 text-sm   '>Details</button>
                     </div>
                     <div>
@@ -47,7 +48,7 @@ function DesktopNav(props: any) {
                                 </div>
                                 </Link>
                             </li>
-                            <li>
+                            <li onClick={Logout}>
                                 <div id='link'>
                                     <IoLogOutOutline className="text-[1.6rem] " />
                                     <span>Logout</span>

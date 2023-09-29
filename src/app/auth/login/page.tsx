@@ -10,7 +10,6 @@ import { object, string, number, date, InferType } from 'yup';
 import { useForm } from "react-hook-form"
 import '../../styles/auth.css'
 import Error from "@/app/_components/error";
-import { UserLoginResponse } from "@/app/models/user.model";
 
 
 const Page = () => {
@@ -19,11 +18,6 @@ const Page = () => {
     const [password, setPassword] = useState<string>('');
     const router = useRouter();
 
-    useEffect(()=>{
-        const res: any = localStorage.getItem("utk");
-        const User = JSON.parse(res);
-        console.log(User)
-    },[])
 
     let userSchema = object({
         email: string().required('Email is required').email('Must be a valid email'),

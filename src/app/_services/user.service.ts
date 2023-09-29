@@ -1,7 +1,7 @@
 import { getFirestore, doc, setDoc, getDoc, DocumentData } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebase";
-import { UserLoginResponse } from "../models/user.model";
+import { User } from "../models/user.model";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -17,6 +17,11 @@ const getUserData = async(uid: string): Promise<DocumentData | undefined> =>{
     return (docSnap.data())
 }
 
+const createUser = async(user: User) =>{
+    const res = await setDoc(doc(db, "users", user.user_id), user);
+}
+
 export {
-    getUserData
+    getUserData,
+    createUser
 }
