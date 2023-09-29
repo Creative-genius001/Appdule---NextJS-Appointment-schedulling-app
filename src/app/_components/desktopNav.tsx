@@ -11,23 +11,16 @@ import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5'
 import { useRouter, usePathname } from 'next/navigation'
 import '@/app/styles/navbar.css'
 
+function DesktopNav(props: any) {
 
-function MobileNav(props: any) {
+    const pathname = usePathname()
+    const router = useRouter();
 
-  const pathname = usePathname()
-  const router = useRouter();
   return (
-    <div className='bg-[white] w-screen h-screen absolute top-0 left-0 p-6 flex flex-col justify-start'>
+    <div className='drop-down bg-[white] w-[400px] h-[350px] rounded-[12px] absolute top-24 right-16 p-6 flex flex-col justify-start'>
                     <div className='mb-6 flex justify-between items-center'>
-                        <div onClick={() => props.closeDropDown()} className='notification mr-4 rounded-[50%] bg-lightgrey w-12 h-12 flex justify-center items-center cursor-pointer'>
-                            <span className='font-medium'>
-                              <HiMiniArrowLeft />
-                            </span>
-                        </div>
+                        <h3 className='font-semibold text-lg'>Ovie Ighosuakpo</h3>
                         <button onClick={()=> router.push('/settings/profile')} className='rounded-[20px] text-[white] font-semibold bg-lightblue px-4 py-1 text-sm   '>Details</button>
-                    </div>
-                    <div className='mb-3'>
-                      <h3 className='font-semibold text-2xl'>Ovie Ighosuakpo</h3>
                     </div>
                     <div>
                          <ul>
@@ -63,8 +56,7 @@ function MobileNav(props: any) {
                         </ul>
                     </div>
                 </div>
-     
   )
 }
 
-export default MobileNav
+export default DesktopNav
