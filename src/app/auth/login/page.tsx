@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { Login } from "@/app/_services/auth.service";
 import { object, string, number, date, InferType } from 'yup';
@@ -15,20 +16,12 @@ const Page = () => {
     const [error, setError] = useState<string | null>(null);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const router = useRouter();
 
     let userSchema = object({
         email: string().required('Email is required').email('Must be a valid email'),
         password: string().required('Password is required').min(8, 'Minimum of 8 characters')
     });
-
-//     const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm({
-//     resolver: yupResolver(schema),
-//   })
-//   const onSubmit = (data) => console.log(data)
 
 
     const handleSubmit = async(email: string, password: string) => {
@@ -44,8 +37,8 @@ const Page = () => {
 
     async function login(email: string, password: string){
         const res = await Login(email, password)
-        if(res === 'Invalid email or password'){
-            setError(res)
+        if(res.statusCode === 200){
+            router.push('/home')
         }
     }
    

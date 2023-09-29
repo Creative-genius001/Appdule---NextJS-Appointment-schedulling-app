@@ -6,10 +6,10 @@ import Link from 'next/link'
 // import RouteGuard from '@/guard/routeGuard'
 import Table from '@/app/_components/table'
 import { AppointmentData, data } from '@/app/_data/data'
-import Navbar from '../_components/navbar'
-import MobileNav from '../_components/mobileNav'
-import CreateAppointment from '../_components/createAppointment'
-import Sidenav from '../_components/sidenav'
+import Navbar from '../../_components/navbar'
+import MobileNav from '../../_components/mobileNav'
+import CreateAppointment from '../../_components/createAppointment'
+import Sidenav from '../../_components/sidenav'
 
 function Page() {
 
