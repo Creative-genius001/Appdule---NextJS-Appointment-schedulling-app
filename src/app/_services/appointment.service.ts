@@ -11,9 +11,10 @@ async function getAppointments(uid: string){
     const q = query(collection(db, "appointments"), where("user_id", "==", uid));
     const querySnapshot = await getDocs(q);
     if(!querySnapshot){
-        throw new Error('Could not get Appointments')
+        console.error('Could not get Appointments')
     }
     querySnapshot.forEach((doc) => {
+        console.log(doc.data())
         appointments.push(doc.data())
     });
 

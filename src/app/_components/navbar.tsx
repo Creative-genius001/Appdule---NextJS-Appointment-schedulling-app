@@ -56,7 +56,7 @@ function Navbar() {
     return (
             <div className='bg-[white] sticky top-0 left-0 w-screen h-[100px] sm:px-5 lg:px-20 py-8 flex justify-between items-center'>
                 <div className="logo-div">
-                    <span onClick={()=> router.push('/home')} className='font-bold sm:text-[1.7rem] lg:text-[2.4rem] text-lightblue'>Appdule</span>
+                    <span onClick={()=> router.push('/home')} className='font-bold sm:text-[1.7rem] lg:text-[2.4rem] text-lightblue cursor-pointer '>Appdule</span>
                 </div>
                 <div className='flex justify-start items-center sm:mr-0 lg:mr-4'>
                     <div className='notification sm:mr-0 lg:mr-3 rounded-[50%] bg-lightgrey w-12 h-12 flex justify-center items-center'>
