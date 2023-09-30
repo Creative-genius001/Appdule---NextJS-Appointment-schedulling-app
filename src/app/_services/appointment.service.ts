@@ -43,7 +43,8 @@ async function createAppointment(data: AppointmentRequest){
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString()
     }
-    await addDoc(collection(db, "appointments"), body);
+    await addDoc(collection(db, "appointments"), body)
+       
 
 }
 

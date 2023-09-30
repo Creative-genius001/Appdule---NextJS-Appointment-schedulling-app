@@ -17,18 +17,18 @@ function Page() {
     setCreateBtn(!createBtn)
   }
 
-  // React.useEffect(()=>{
-  //   const fetchAppointmentData = async()=> {
-  //     const store: any = localStorage.getItem('utk');
-  //     const uid = (JSON.parse(store)).user_id
-  //     console.log(uid)
+  React.useEffect(()=>{
+    // const fetchAppointmentData = async()=> {
+    //   const store: any = localStorage.getItem('utk');
+    //   const uid = (JSON.parse(store)).user_id
+    //   console.log(uid)
 
-  //     const res = await getAppointments(uid)
-  //     setAppointments
-  //   }
+    //   const res = await getAppointments(uid)
+    //   setAppointments
+    // }
 
-  //   fetchAppointmentData();
-  // },[])
+    // fetchAppointmentData();
+  },[])
 
   return (
     <RouteGuard>

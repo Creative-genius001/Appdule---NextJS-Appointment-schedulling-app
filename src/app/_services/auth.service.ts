@@ -5,7 +5,7 @@ import handleError from "../utils/errorhandler";
 import { User } from "../models/user.model";
 import { getUserData, createUser } from "./user.service";
 import { DocumentData } from "firebase/firestore";
-import { useRouter } from "next/router";
+import jwtDecode, { JwtPayload } from "jwt-decode";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
@@ -33,6 +33,8 @@ async function Login(email: string, password: string){
     if(!res){
         throw new Error('Invalid Credentials');
     }
+    const accessToken =  await res.user.getIdToken();
+    localStorage.setItem('atk', accessToken);
     const User: DocumentData | undefined = await getUserData(res.user.uid);
     if(!User){
         throw new Error('Could not create new user')
@@ -41,10 +43,25 @@ async function Login(email: string, password: string){
     return ({statusCode: 200})
 }
 
+
+function checkUserLoggedIn(){
+    const token = localStorage.getItem('atk');
+    if(!token) return false;
+    const decodedToken = jwtDecode<JwtPayload>(token);
+    const expirationTime = decodedToken.exp
+    if(!expirationTime) return false;
+    const currentTime = new Date().getTime()
+    if ((expirationTime*1000) < currentTime) {
+        localStorage.removeItem('utk');
+        return false;
+    };
+    return true;
+}
+
 async function Logout(){
     await signOut(auth)
     localStorage.removeItem('utk')
 }
 
 
-export {Signup, Login, Logout}
+export {Signup, Login, Logout, checkUserLoggedIn}

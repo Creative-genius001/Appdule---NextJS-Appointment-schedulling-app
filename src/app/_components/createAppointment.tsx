@@ -41,7 +41,8 @@ function CreateAppointment(props: any) {
             time,
             description
         }
-        await createAppointment(request)
+        await createAppointment(request);
+        
     }
 
   return (
