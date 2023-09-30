@@ -1,7 +1,8 @@
-import { DocumentData, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore"
+import { DocumentData, addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore"
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebase";
-import { AppointmentModel } from "../models/appointment.model";
+import { AppointmentModel, AppointmentRequest } from "../models/appointment.model";
+import generateRandomString from "../utils/generateRandomChar";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -33,6 +34,21 @@ async function getSingleAppointment(uid: string){
     return (docSnap.data())
 }
 
+async function createAppointment(data: AppointmentRequest){
+    const random = generateRandomString(10);
+
+    const body: AppointmentModel = {...data,
+        appointment_id: random, 
+        status: 'PENDING', 
+        updatedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString()
+    }
+    await addDoc(collection(db, "appointments"), body);
+
+}
+
 export {
-    getAppointments
+    getAppointments,
+    getSingleAppointment,
+    createAppointment
 }

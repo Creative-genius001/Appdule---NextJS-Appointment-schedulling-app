@@ -5,9 +5,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 
-function Timepicker() {
+function Timepicker(props: any) {
 
-    const [time, setTime] = React.useState('')
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={['MobileTimePicker']}>
@@ -16,8 +15,8 @@ function Timepicker() {
                     sx={{ width: '100%'}}
                     onChange={(newValue: any) => {
                         newValue = dayjs(newValue).format('h:mm A')
-                        setTime(newValue)
                         console.log(newValue)
+                        props.getTime(newValue)
                     }}
                 />
             </DemoContainer>

@@ -9,3 +9,12 @@ export interface AppointmentModel {
     updatedAt: string,
     status: 'ACTIVE' | 'PENDING' | 'COMPLETED'
 }
+
+
+export interface AppointmentRequest {
+    user_id: string,
+    title: string,
+    date: string,
+    time: string,
+    description: string,
+}

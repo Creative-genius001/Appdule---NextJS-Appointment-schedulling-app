@@ -6,7 +6,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
-function Datepicker() {
+function Datepicker(props: any) {
 
     const [date, setDate] = React.useState<string>('');
 
@@ -19,8 +19,8 @@ function Datepicker() {
                     sx={{ width: '100%'}}
                     onChange={(newValue: any) => {
                         newValue = dayjs(newValue).format('dddd, MMMM D, YYYY')
-                        setDate(newValue)
-                        console.log(date)
+                        console.log(newValue)
+                        props.getDate(newValue)
                     }}
                 />
             </DemoContainer>
