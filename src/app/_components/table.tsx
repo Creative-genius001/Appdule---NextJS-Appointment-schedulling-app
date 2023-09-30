@@ -1,17 +1,10 @@
-import { AppointmentData, data } from '../_data/data';
 import { MdDeleteOutline } from 'react-icons/md'
+import { AppointmentModel } from '../models/appointment.model';
+import { DocumentData } from 'firebase/firestore';
 
 
-interface DataProps {
-  data: AppointmentData[];
-}
 
-const Table: React.FC<DataProps> = ({data}): JSX.Element  => {
-
-    const processDate = (arg : number) => {
-        let date = new Date(arg);
-        return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    }
+const Table: React.FC<DocumentData> = ({data}): JSX.Element  => {
 
     return ( 
         <>
@@ -28,11 +21,11 @@ const Table: React.FC<DataProps> = ({data}): JSX.Element  => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data?.map((appt, index)=>{
+                            {data?.map((appt: AppointmentModel, index: number)=>{
                                 return(
                             <tr key={index}>
                                 <td className="id">
-                                    <p>{appt.id}</p>
+                                    <p>{appt.appointment_id}</p>
                                 </td>
                                 <td className="date">
                                     <p>{appt.date}</p>

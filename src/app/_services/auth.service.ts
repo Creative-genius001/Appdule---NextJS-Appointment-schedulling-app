@@ -11,9 +11,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
 async function Signup(email: string, password: string, firstName: string, lastName: string){
-    console.log('authenticating....')
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(res)
     if(!res){
         throw new Error('Could not SignUp user');
     }

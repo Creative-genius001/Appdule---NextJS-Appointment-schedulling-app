@@ -1,4 +1,4 @@
-export interface AppointmentRequest {
+export interface AppointmentModel {
     user_id: string,
     appointment_id: string,
     title: string,

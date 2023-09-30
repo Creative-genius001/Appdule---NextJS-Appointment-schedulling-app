@@ -26,11 +26,12 @@ function Navbar() {
     useEffect(()=> {
 
         const res: any = localStorage.getItem("utk");
-        const User : User = JSON.parse(res);
-        setUser(User)
-        
-        const shortName = User.firstName.charAt(0) + User.lastName.charAt(0)
-        setShortUsername(shortName.toUpperCase());
+        if(res != null){
+            const User : User = JSON.parse(res);
+            setUser(User)
+            const shortName = User.firstName.charAt(0) + User.lastName.charAt(0)
+            setShortUsername(shortName.toUpperCase());
+        }
 
         function checkWindowWidth() {
             const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -55,7 +56,7 @@ function Navbar() {
     return (
             <div className='bg-[white] sticky top-0 left-0 w-screen h-[100px] sm:px-5 lg:px-20 py-8 flex justify-between items-center'>
                 <div className="logo-div">
-                    <span className='font-bold sm:text-[1.7rem] lg:text-[2.4rem] text-lightblue'>Appdule</span>
+                    <span onClick={()=> router.push('/home')} className='font-bold sm:text-[1.7rem] lg:text-[2.4rem] text-lightblue'>Appdule</span>
                 </div>
                 <div className='flex justify-start items-center sm:mr-0 lg:mr-4'>
                     <div className='notification sm:mr-0 lg:mr-3 rounded-[50%] bg-lightgrey w-12 h-12 flex justify-center items-center'>
@@ -66,7 +67,7 @@ function Navbar() {
                             <span className='font-medium'>{shortUsername}</span>
                         </div>
                         <div className='flex justify-start items-center'>
-                            <span className='mr-2 sm:invisible lg:visible'>{user?.firstName} {user?.lastName}</span>
+                            <span className='mr-2 sm:invisible sm:hidden lg:block lg:visible'>{user?.firstName} {user?.lastName}</span>
                             <IoIosArrowDown />
                         </div>
                     </div>

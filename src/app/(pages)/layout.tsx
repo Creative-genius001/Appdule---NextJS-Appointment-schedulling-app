@@ -1,5 +1,6 @@
 import Navbar from "../_components/navbar"
 
+
 export default function NavLayout({
   children,
 }: {
@@ -11,4 +12,4 @@ export default function NavLayout({
         {children}
     </section>
   )
-}
+} 

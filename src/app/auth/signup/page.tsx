@@ -48,20 +48,20 @@ const Page = () => {
                     <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
                         <div className="flex w-full gap-3">
                             <div className="flex flex-col w-full">
-                                <label className="text-base font-semibold mb-1 ">Firstname</label>
+                                <label className="text-base font-medium mb-1 ">Firstname</label>
                                 <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setFirstName(e.target.value)} type="text" placeholder="Firstname"></input>
                             </div>
                             <div className="flex flex-col w-full">
-                                <label className="text-base font-semibold mb-1 ">Lastname</label>
+                                <label className="text-base font-medium mb-1 ">Lastname</label>
                                 <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setLastName(e.target.value)} type="text" placeholder="Lastname"></input>
                             </div>
                         </div>
                         <div className="flex flex-col mt-3">
-                            <label className="text-base font-semibold mb-1 ">Email</label>
+                            <label className="text-base font-medium mb-1 ">Email</label>
                             <input onChange={(e: ChangeEvent<HTMLInputElement>)=> setEmail(e.target.value)} type="text" placeholder="Email"></input>
                         </div>
                         <div className="flex flex-col mt-3">
-                            <label className="text-base font-semibold mb-1">Password</label>
+                            <label className="text-base font-medium mb-1">Password</label>
                             <input type='password' onChange={(e: ChangeEvent<HTMLInputElement>)=> setPassword(e.target.value)} placeholder="Password"></input>
                         </div>
                         <input className="button" type="submit" value='Signup' />

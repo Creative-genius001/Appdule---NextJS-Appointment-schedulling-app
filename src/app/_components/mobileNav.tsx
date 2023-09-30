@@ -55,7 +55,10 @@ function MobileNav(props: any) {
                                 </div>
                                 </Link>
                             </li>
-                            <li onClick={Logout}>
+                            <li  onClick={()=>{
+                                Logout()
+                                router.push('auth/login')
+                            }}>
                                 <div id='link'>
                                     <IoLogOutOutline className="text-[1.6rem] " />
                                     <span>Logout</span>
