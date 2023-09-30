@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { getAppointments } from '@/app/_services/appointment.service';
 import { AppointmentModel } from '@/app/models/appointment.model';
 import { DocumentData } from 'firebase/firestore';
+import Loader from '@/app/_components/loader';
                                                                                                                                                                                                                                                                                                                                        
 
 const Page = () => {
@@ -31,7 +32,7 @@ const Page = () => {
             <div className='bg-darkSecondary h-screen  pt-8 lg:px-[70px] sm:px-[20px] w-screen'>
               <h1 className='lg:text-2xl sm:text-lg font-medium'>All Appointments</h1>
                   <div className='appt-container'>
-                    <Table data={data}/>
+                    {!data ? <Loader /> : <Table data={data}/>}
                   </div>
             </div>      
         </> 
