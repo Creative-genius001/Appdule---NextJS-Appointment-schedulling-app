@@ -52,7 +52,6 @@ function checkUserLoggedIn(){
     if(!expirationTime) return false;
     const currentTime = new Date().getTime()
     if ((expirationTime*1000) < currentTime) {
-        localStorage.removeItem('utk');
         return false;
     };
     return true;

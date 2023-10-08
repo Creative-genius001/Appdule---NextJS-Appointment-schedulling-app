@@ -33,7 +33,7 @@ const Page = () => {
 
     return ( 
         <>
-            <div className='bg-darkSecondary h-screen  pt-8 lg:px-[70px] sm:px-[20px] w-screen'>
+            <div className='bg-darkSecondary min-h-screen  pt-8 lg:px-[70px] sm:px-[20px] w-screen'>
               <h1 className='lg:text-2xl sm:text-xl font-medium'>All Appointments</h1>
                   <div className='appt-container'>
                     {loading ? <Loader /> : ''}
