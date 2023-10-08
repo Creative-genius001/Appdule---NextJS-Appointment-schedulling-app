@@ -9,13 +9,22 @@ import { getAppointments } from '@/app/_services/appointment.service';
 import { BsFillCalendarMinusFill } from 'react-icons/bs'
 import { DocumentData } from 'firebase/firestore';
 import Loader from '@/app/_components/loader';
+import { RootState, useAppDispatch } from '@/app/store/store';
+import { fetchAppointmentData } from '@/app/store/appointment/appointmentActions';
+import { fetchAppointments } from '@/app/store/appointment/appointmentSlice';
+import { useSelector } from 'react-redux';
                                                                                                                                                                                                                                                                                                                                        
 
 const Page = () => {
-  const[data, setData] = React.useState<DocumentData[]>([])
+  // const[data, setData] = React.useState<DocumentData[]>([])
   const[loading, setLoading] = React.useState<boolean>(true)
 
+  const dispatch = useAppDispatch();
+  
+  const data = useSelector((state: RootState) => state.appointments.appointment);
+
   React.useEffect(()=>{
+
     const fetchAppointmentData = async()=> {
       const store: any = localStorage.getItem('utk');
       const uid = (JSON.parse(store)).user_id
@@ -25,7 +34,7 @@ const Page = () => {
         setLoading(false)
       }
       setLoading(false)
-      setData(res)
+      dispatch(fetchAppointments(res));
     }
 
     fetchAppointmentData();
@@ -37,13 +46,13 @@ const Page = () => {
               <h1 className='lg:text-2xl sm:text-xl font-medium'>All Appointments</h1>
                   <div className='appt-container'>
                     {loading ? <Loader /> : ''}
-                    {(data.length === 0 && !loading ) && (
+                    {(data?.length === 0 && !loading ) && (
                       <div className='w-full bg-[white] p-16 mt-4 flex flex-col justify-center items-center'>
                         <BsFillCalendarMinusFill className="opacity-50 text-[4rem] " />
                         <p className='mt-3 font-medium sm:text-base md:text-xl opacity-50 text-center leading-snug'>You have not booked any appointment</p>
                       </div>
                     )}
-                    {(data.length > 0 && !loading ) && <Table data={data}/>}
+                    {(data?.length > 0 && !loading ) && <Table data={data}/>}
                   </div>
             </div>      
         </> 

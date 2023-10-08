@@ -15,7 +15,6 @@ async function getAppointments(uid: string){
         console.error('Could not get Appointments')
     }
     querySnapshot.forEach((doc) => {
-        console.log(doc.data())
         appointments.push(doc.data())
     });
 
