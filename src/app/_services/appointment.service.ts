@@ -56,7 +56,14 @@ async function createAppointment(data: AppointmentRequest){
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString()
     }
-    await addDoc(collection(db, "appointments"), body)
+    try {
+        await addDoc(collection(db, "appointments"), body)
+        return true 
+    } catch (error) {
+        console.error('error creating appointment')
+        return false
+    }
+    
        
 
 }

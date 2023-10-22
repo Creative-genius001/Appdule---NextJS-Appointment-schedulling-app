@@ -2,27 +2,23 @@
 
 import * as React from 'react'
 import Table from '@/app/_components/table';
-import type { ColumnsType } from 'antd/es/table';
-import { data } from '../../_data/data';
 import { useEffect } from 'react';
 import { getAppointments } from '@/app/_services/appointment.service';
 import { BsFillCalendarMinusFill } from 'react-icons/bs'
-import { DocumentData } from 'firebase/firestore';
 import Loader from '@/app/_components/loader';
 import { RootState, useAppDispatch } from '@/app/store/store';
-import { fetchAppointmentData } from '@/app/store/appointment/appointmentActions';
-import { fetchAppointments } from '@/app/store/appointment/appointmentSlice';
 import { useSelector } from 'react-redux';
 import routeGuard from '@/app/_guard/routeGuard';
+import { AppointmentModel } from '@/app/models/appointment.model';
                                                                                                                                                                                                                                                                                                                                        
 
 const Page = () => {
-  // const[data, setData] = React.useState<DocumentData[]>([])
+  const[data, setData] = React.useState<AppointmentModel[]>([])
   const[loading, setLoading] = React.useState<boolean>(true)
 
   const dispatch = useAppDispatch();
   
-  const data = useSelector((state: RootState) => state.appointments.appointment);
+  // const data = useSelector((state: RootState) => state.appointments.appointment);
 
   React.useEffect(()=>{
 
@@ -35,7 +31,8 @@ const Page = () => {
         setLoading(false)
       }
       setLoading(false)
-      dispatch(fetchAppointments(res));
+      setData(res)
+      // dispatch(fetchAppointments(res));
     }
 
     fetchAppointmentData();

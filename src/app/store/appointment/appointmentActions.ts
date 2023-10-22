@@ -1,15 +1,12 @@
+import {createAsyncThunk} from "@reduxjs/toolkit";
+import { getAppointments } from '@/app/_services/appointment.service';
 
-import { fetchAppointments } from './appointmentSlice';
-import { getUserData } from '@/app/_services/user.service';
-
-export const fetchAppointmentData = (uid: string) => async (dispatch: any) => {
+export const fetchAppointments = createAsyncThunk('appointment/fetchAppointments', async(uid: string, thunkAPI) =>{
   try {
-        const data = await getUserData(uid)
-
-    if (data) {
-      dispatch(fetchAppointments(data));
-    }
+    const response = await getAppointments(uid)
+    console.log(response)
+    return response;
   } catch (error) {
-    console.error('Error fetching user data:', error);
+    return thunkAPI.rejectWithValue('error in fetching appointments')
   }
-};
+})

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ChangeEvent, FormEvent, useEffect } from 'react'
+import React, { FormEvent, useEffect } from 'react'
 import '@/app/styles/createAppointment.css'
 import Datepicker from './datepicker'
 import { MdOutlineCancel } from 'react-icons/md'
@@ -41,7 +41,7 @@ function CreateAppointment(props: any) {
             time,
             description
         }
-        await createAppointment(request);
+        props.createAppt(request)
         
     }
 
@@ -54,7 +54,7 @@ function CreateAppointment(props: any) {
                 <MdOutlineCancel onClick={props.showCreateAppt} className='text-[1.8rem] cursor-pointer opacity-70 ' />
             </div>
             {/* <p className='leading-snug w-[70%]'>Create a new appointment to see a doctor describing your illness in less words.</p> */}
-            <form onSubmit={(e)=> handleSubmit(e)} className='mt-4'>
+            <form onSubmit={handleSubmit} className='mt-4'>
                 <div className="flex flex-col">
                     <label className="text-[0.9rem] font-medium mb-1 ">Title</label>
                     <input onChange={(e)=> setTitle(e.target.value)} type="text" placeholder="e.g Fever Symptoms" required/>

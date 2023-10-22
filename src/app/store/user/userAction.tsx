@@ -6,7 +6,6 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 export const fetchUser = createAsyncThunk('user/fetchUser', async(uid: string, thunkAPI) =>{
   try {
     const response = await getUserData(uid)
-    console.log(response)
     localStorage.setItem('utk', JSON.stringify(response));
     return response;
   } catch (error) {
