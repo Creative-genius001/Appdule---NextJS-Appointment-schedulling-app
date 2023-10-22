@@ -33,6 +33,20 @@ async function getSingleAppointment(uid: string){
     return (docSnap.data())
 }
 
+
+async function getUpcomingAppointment(uid: string){
+    const q = query(collection(db, "appointments"), where("status", "==", 'ACTIVE'));
+
+    const querySnapshot = await getDocs(q);
+    return querySnapshot;
+    // querySnapshot.forEach((doc) => {
+    // // doc.data() is never undefined for query doc snapshots
+    // let u = []
+    // u.push(doc.data())
+    // return u;
+    // });
+}
+
 async function createAppointment(data: AppointmentRequest){
     const random = generateRandomString(10);
 
@@ -50,5 +64,6 @@ async function createAppointment(data: AppointmentRequest){
 export {
     getAppointments,
     getSingleAppointment,
-    createAppointment
+    createAppointment,
+    getUpcomingAppointment
 }

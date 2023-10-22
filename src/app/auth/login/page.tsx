@@ -30,10 +30,7 @@ const Page = () => {
     });
 
     async function login(email: string, password: string){
-        const res = await Login(email, password)
-        if(res.statusCode === 200){
-            router.push('/home')
-        }
+        await Login(email, password)
     }
    
     return ( 

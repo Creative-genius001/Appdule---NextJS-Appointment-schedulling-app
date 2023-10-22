@@ -6,6 +6,7 @@ import { User } from "../models/user.model";
 import { getUserData, createUser } from "./user.service";
 import { DocumentData } from "firebase/firestore";
 import jwtDecode, { JwtPayload } from "jwt-decode";
+import { redirect } from "next/navigation";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
@@ -24,7 +25,7 @@ async function Signup(email: string, password: string, firstName: string, lastNa
         createdAt: new Date().toISOString()
     }
     await createUser(User)
-    return ({statusCode: 200})
+    redirect('/auth/login');
 }
 
 async function Login(email: string, password: string){
@@ -40,7 +41,7 @@ async function Login(email: string, password: string){
         throw new Error('Could not create new user')
     }
     localStorage.setItem('utk', JSON.stringify(User));
-    return ({statusCode: 200})
+    redirect('/home');
 }
 
 
@@ -59,7 +60,9 @@ function checkUserLoggedIn(){
 
 async function Logout(){
     await signOut(auth)
+    localStorage.removeItem('atk')
     localStorage.removeItem('utk')
+    redirect('/auth/login');
 }
 
 

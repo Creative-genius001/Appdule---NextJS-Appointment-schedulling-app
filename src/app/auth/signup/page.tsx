@@ -33,10 +33,7 @@ const Page = () => {
 
 
     const handleSubmit = async(value: SignupProp) =>{
-        const res = await Signup(value.email, value.password, value.firstName, value.lastName);
-        if(res.statusCode === 200){
-            router.push('/auth/login')
-        }
+        await Signup(value.email, value.password, value.firstName, value.lastName);
     }
    
     return ( 

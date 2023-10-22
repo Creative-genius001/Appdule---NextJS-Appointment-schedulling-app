@@ -7,31 +7,42 @@ import RouteGuard from '@/app/_guard/routeGuard'
 import Table from '@/app/_components/table'
 import { AppointmentData, data } from '@/app/_data/data'
 import CreateAppointment from '../../_components/createAppointment'
-import { getAppointments } from '@/app/_services/appointment.service'
+import { getAppointments, getUpcomingAppointment } from '@/app/_services/appointment.service'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/app/store/store'
+import { DocumentData } from 'firebase/firestore'
+import { AppointmentModel } from '@/app/models/appointment.model'
+import routeGuard from '@/app/_guard/routeGuard'
 
 
 function Page() {
 
   const [createBtn, setCreateBtn] = React.useState<boolean>(false)
+  const [data, setData] = React.useState<any>([])
+  // const data: any = []
   const showCreateAppt = () => {
     setCreateBtn(!createBtn)
   }
 
+
   React.useEffect(()=>{
-    // const fetchAppointmentData = async()=> {
-    //   const store: any = localStorage.getItem('utk');
-    //   const uid = (JSON.parse(store)).user_id
-    //   console.log(uid)
+    const fetchUpcomingAppointments = async()=> {
+      const store: any = localStorage.getItem('utk');
+      const uid = (JSON.parse(store)).user_id
 
-    //   const res = await getAppointments(uid)
-    //   setAppointments
-    // }
+      const res = await getUpcomingAppointment(uid)
+      res.forEach((doc) => {
+        setData(doc.data())
+        console.log(data)
+        // console.log(data)
+      });
+    }
 
-    // fetchAppointmentData();
+    fetchUpcomingAppointments();
   },[])
 
   return (
-    <RouteGuard>
+    <>
       <div className='bg-[#fafafa] text-dark w-screen pt-8 lg:px-[70px] sm:px-[20px] min-h-screen'>
       { createBtn && <CreateAppointment showCreateAppt={showCreateAppt} /> }
       <div className='main-card w-full h-[250px] bg-[#ffffff] flex flex-col justify-center items-center mt-4 rounded-[6px]'>
@@ -48,8 +59,8 @@ function Page() {
       </div>
 
       </div>
-    </RouteGuard>
+    </>
   )
 }
 
-export default Page;
+export default routeGuard(Page);

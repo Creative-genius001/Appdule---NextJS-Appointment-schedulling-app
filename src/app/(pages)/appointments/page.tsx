@@ -13,6 +13,7 @@ import { RootState, useAppDispatch } from '@/app/store/store';
 import { fetchAppointmentData } from '@/app/store/appointment/appointmentActions';
 import { fetchAppointments } from '@/app/store/appointment/appointmentSlice';
 import { useSelector } from 'react-redux';
+import routeGuard from '@/app/_guard/routeGuard';
                                                                                                                                                                                                                                                                                                                                        
 
 const Page = () => {
@@ -59,4 +60,4 @@ const Page = () => {
         );
 }
  
-export default Page;
+export default routeGuard(Page);
