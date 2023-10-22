@@ -1,32 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../store'
 import { DocumentData } from 'firebase/firestore'
-import { User } from '@/app/models/user.model'
+import { fetchUser } from './userAction'
 
 
 interface UserState {
   user: DocumentData | null,
-  error: '',
+  isLoading: boolean
+  error: string,
 }
 
 const initialState: UserState = {
   user: null,
+  isLoading: false,
   error: '',
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    fetchUser: (state, action: PayloadAction<DocumentData>) => {
-      state.user = action.payload
+  reducers: {},
+  extraReducers: {
+    [fetchUser.fulfilled.type]: (state, action: PayloadAction<DocumentData>) => {
+      state.user = action.payload,
+      state.isLoading = false,
+      state.error = '' 
+    },
+    [fetchUser.pending.type]: (state, action: PayloadAction<DocumentData>) => {
+      state.isLoading = true
+    },
+    [fetchUser.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false,
+      state.error = action.payload 
     }
-  },
+  }
 })
-
-export const { fetchUser } = userSlice.actions
-
-// export const selectUser = (state: RootState) => state.user.user;
 
 export default userSlice.reducer

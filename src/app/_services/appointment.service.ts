@@ -7,8 +7,8 @@ import generateRandomString from "../utils/generateRandomChar";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-async function getAppointments(uid: string){
-    const appointments: DocumentData[] = []
+async function getAppointments(uid: string): Promise<AppointmentModel[]>{
+    const appointments: any = []
     const q = query(collection(db, "appointments"), where("user_id", "==", uid));
     const querySnapshot = await getDocs(q);
     if(!querySnapshot){
@@ -17,7 +17,7 @@ async function getAppointments(uid: string){
     querySnapshot.forEach((doc) => {
         appointments.push(doc.data())
     });
-
+    console.log(appointments)
     return appointments;
     
 }

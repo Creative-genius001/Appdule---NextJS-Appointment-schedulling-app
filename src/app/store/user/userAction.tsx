@@ -1,13 +1,15 @@
 
 import { DocumentData } from 'firebase/firestore';
-import { fetchUser } from './userSlice';
 import { getUserData } from '@/app/_services/user.service';
-import { useAppDispatch } from '../store';
+import {createAsyncThunk} from "@reduxjs/toolkit";
 
-export const fetchUserData = (user: DocumentData) => {
-    const dispatch =  useAppDispatch()
-    console.log(user)
-    if (user) {
-      return dispatch(fetchUser(user));
-    }
-};
+export const fetchUser = createAsyncThunk('user/fetchUser', async(uid: string, thunkAPI) =>{
+  try {
+    const response = await getUserData(uid)
+    console.log(response)
+    localStorage.setItem('utk', JSON.stringify(response));
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue('error in fetching user')
+  }
+})

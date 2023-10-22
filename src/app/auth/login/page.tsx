@@ -9,15 +9,17 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import '../../styles/auth.css'
 import Error from "@/app/_components/error";
+import { useAppDispatch } from "@/app/store/store";
+import { fetchUser } from "@/app/store/user/userAction";
 
 
 const Page = () => {
     const [error, setError] = useState<string | null>('null');
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     useEffect(()=>{
         const isAuthenticated = checkUserLoggedIn();
-        console.log(isAuthenticated)
         if(isAuthenticated){
             router.push('/home')
         }
@@ -30,7 +32,8 @@ const Page = () => {
     });
 
     async function login(email: string, password: string){
-        await Login(email, password)
+        const uid: string = await Login(email, password)
+        dispatch(fetchUser(uid));
     }
    
     return ( 

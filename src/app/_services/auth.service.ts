@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
+
 async function Signup(email: string, password: string, firstName: string, lastName: string){
     const res = await createUserWithEmailAndPassword(auth, email, password);
     if(!res){
@@ -29,19 +30,20 @@ async function Signup(email: string, password: string, firstName: string, lastNa
 }
 
 async function Login(email: string, password: string){
-
     const res: UserCredential = await signInWithEmailAndPassword(auth, email, password)
     if(!res){
         throw new Error('Invalid Credentials');
     }
     const accessToken =  await res.user.getIdToken();
     localStorage.setItem('atk', accessToken);
-    const User: DocumentData | undefined = await getUserData(res.user.uid);
-    if(!User){
-        throw new Error('Could not create new user')
-    }
-    localStorage.setItem('utk', JSON.stringify(User));
-    redirect('/home');
+    
+    return res.user.uid;
+    // const User: DocumentData | undefined = await getUserData(res.user.uid);
+    // if(!User){
+    //     throw new Error('Could not create new user')
+    // }
+    // localStorage.setItem('utk', JSON.stringify(User));
+    // redirect('/home');
 }
 
 
