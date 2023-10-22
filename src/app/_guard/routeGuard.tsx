@@ -1,22 +1,25 @@
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
+import { checkUserLoggedIn } from '../_services/auth.service';
 
-function RouteGuard({ children }: any){
-         const router = useRouter();
-         const getUserToken = async () => {
-            const isAuthenticated = localStorage.getItem('utk');
 
-            if (!isAuthenticated) {
-                console.log('No token');
-                return router.push('/auth/login');
-            }
-            };
+export default function routeGuard(Component: any) {
+  return (
+    function WithAuth(props: any) {
+      const isAuthenticated = checkUserLoggedIn()
+      console.log(isAuthenticated);
 
-            useEffect(() => {
-              getUserToken();
-            }, []);
+      useEffect(() => {
+        if (!isAuthenticated) {
+          return redirect('/auth/login')
+        }
+      },)
 
-            return children;
-  }
+      if (!isAuthenticated) {
+        return null;
+      }
 
-export default RouteGuard;
+      return <Component {...props} />
+    }
+  )
+}
