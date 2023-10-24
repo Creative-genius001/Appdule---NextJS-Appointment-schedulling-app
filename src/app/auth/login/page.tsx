@@ -1,9 +1,8 @@
 'use client';
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Login, checkUserLoggedIn } from "@/app/_services/auth.service";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -11,10 +10,11 @@ import '../../styles/auth.css'
 import Error from "@/app/_components/error";
 import { useAppDispatch } from "@/app/store/store";
 import { fetchUser } from "@/app/store/user/userAction";
+import handleError from "@/app/utils/errorhandler";
 
 
 const Page = () => {
-    const [error, setError] = useState<string | null>('null');
+    const [error, setError] = useState<string |undefined>(undefined);
     const router = useRouter();
     const dispatch = useAppDispatch();
 
@@ -23,7 +23,7 @@ const Page = () => {
         if(isAuthenticated){
             router.push('/home')
         }
-    },[])
+    },)
 
 
     const LoginSchema = Yup.object().shape({
@@ -32,18 +32,25 @@ const Page = () => {
     });
 
     async function login(email: string, password: string){
-        const uid: string = await Login(email, password)
-        dispatch(fetchUser(uid));
+        try {
+            const uid = await Login(email, password)
+            if(!uid){
+            console.error('error login in')
+            return;
+        }
+            dispatch(fetchUser(uid));
+            router.push('/home') 
+        } catch (error: any) {
+            const errorMsg = handleError(error);
+            setError(errorMsg)
+        }
     }
    
     return ( 
         <>
         <div className='hero-section'>
-            {/* <div className= "hero-img w-[45%] h-[100vh] rounded-lg bg-[#772929] ">
-                <Image alt="frontimage" src={doc} className="img w-[100%] h-[100%] object-contain rounded-lg "/>
-            </div> */}
             <div className="main-container md:w-[55%] sm:w-screen  h-[100vh] flex flex-col justify-center items-center bg-[white] ">
-                
+                {error ? <Error error={error} /> : ''}
                 <div className="main-container2 lg:w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Login</h1> 
                 <div className="mt-4">

@@ -5,7 +5,6 @@ import '@/app/styles/createAppointment.css'
 import Datepicker from './datepicker'
 import { MdOutlineCancel } from 'react-icons/md'
 import Timepicker from './timepicker'
-import { createAppointment } from '../_services/appointment.service'
 import { User } from '../models/user.model'
 
 function CreateAppointment(props: any) {
@@ -42,7 +41,7 @@ function CreateAppointment(props: any) {
             description
         }
         props.createAppt(request)
-        
+        props.showCreateAppt();  
     }
 
   return (
@@ -53,7 +52,6 @@ function CreateAppointment(props: any) {
                 <h1 className=' font-semibold text-2xl'>Create Appointment</h1>
                 <MdOutlineCancel onClick={props.showCreateAppt} className='text-[1.8rem] cursor-pointer opacity-70 ' />
             </div>
-            {/* <p className='leading-snug w-[70%]'>Create a new appointment to see a doctor describing your illness in less words.</p> */}
             <form onSubmit={handleSubmit} className='mt-4'>
                 <div className="flex flex-col">
                     <label className="text-[0.9rem] font-medium mb-1 ">Title</label>

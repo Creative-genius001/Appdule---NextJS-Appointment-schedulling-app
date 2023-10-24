@@ -1,16 +1,23 @@
-function handleError(error: string){
-
-    switch(error){
-        case 'auth/wrong-password':
+function handleError(errorMessage: string){
+    const match = errorMessage.match(/\(auth\/(.*?)\)/);
+    if(match){
+        const errorType = match[1];
+        switch(errorType){
+        case 'wrong-password':
             return 'Invalid email or password'
             break;
-        case 'auth/user-not-found':
-            return 'Invalid email or password'
+        case 'user-not-found':
+            return 'User not found'
             break;
         default:
             break;
-    }
+    }        
 
+    }
 }
+
+
+
+
 
 export default handleError

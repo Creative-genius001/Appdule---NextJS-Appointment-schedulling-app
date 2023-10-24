@@ -33,8 +33,6 @@ function SnackBar(props: any) {
             anchorOrigin={{ vertical, horizontal }}
             open={props.open}
             autoHideDuration={6000}
-            // onClose={handleClose}
-            // message={props.msg}
             key={vertical + horizontal} 
             action={action}
         >
