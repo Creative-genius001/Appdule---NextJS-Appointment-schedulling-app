@@ -30,15 +30,20 @@ async function Signup(email: string, password: string, firstName: string, lastNa
     return true;
 }
 
-async function Login(email: string, password: string): Promise<string | undefined>{
+async function Login(email: string, password: string): Promise<{uid: string, accessToken: string} | undefined>{
     try {
         const res: UserCredential = await signInWithEmailAndPassword(auth, email, password)
         if(!res){
-            throw new Error('Invalid Credentials');
+            throw ('Invalid Credentials');
         }
         const accessToken =  await res.user.getIdToken();
+        const uid = res.user.uid;
         localStorage.setItem('atk', accessToken);
-        return res.user.uid;
+        localStorage.setItem('utk', uid);
+        return ({
+            uid,
+            accessToken
+        })
     } catch (error: any) {
         throw error.message;
     }

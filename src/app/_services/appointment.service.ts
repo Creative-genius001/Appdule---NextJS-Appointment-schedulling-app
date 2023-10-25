@@ -35,16 +35,15 @@ async function getSingleAppointment(uid: string){
 
 
 async function getUpcomingAppointment(uid: string){
+    const U: any = []
     const q = query(collection(db, "appointments"), where("status", "==", 'ACTIVE'));
 
     const querySnapshot = await getDocs(q);
-    return querySnapshot;
-    // querySnapshot.forEach((doc) => {
-    // // doc.data() is never undefined for query doc snapshots
-    // let u = []
-    // u.push(doc.data())
-    // return u;
-    // });
+    querySnapshot.forEach((doc) => {
+        U.push(doc.data())
+    });
+    return U;
+
 }
 
 async function createAppointment(data: AppointmentRequest){

@@ -11,10 +11,13 @@ import Error from "@/app/_components/error";
 import { useAppDispatch } from "@/app/store/store";
 import { fetchUser } from "@/app/store/user/userAction";
 import handleError from "@/app/utils/errorhandler";
+import { login } from "@/app/store/auth/authSlice";
+import { useSelector } from "react-redux";
 
 
 const Page = () => {
-    const [error, setError] = useState<string |undefined>(undefined);
+    const { error, loading } = useSelector((state: any) => state.auth);
+    console.log(error)
     const router = useRouter();
     const dispatch = useAppDispatch();
 
@@ -31,26 +34,15 @@ const Page = () => {
         password: Yup.string().required('Password is required').min(8, 'Minimum of 8 characters')
     });
 
-    async function login(email: string, password: string){
-        try {
-            const uid = await Login(email, password)
-            if(!uid){
-            console.error('error login in')
-            return;
-        }
-            dispatch(fetchUser(uid));
-            router.push('/home') 
-        } catch (error: any) {
-            const errorMsg = handleError(error);
-            setError(errorMsg)
-        }
+    async function loginUser(email: string, password: string){
+        dispatch(login({email, password}))
     }
    
     return ( 
         <>
         <div className='hero-section'>
             <div className="main-container md:w-[55%] sm:w-screen  h-[100vh] flex flex-col justify-center items-center bg-[white] ">
-                {error ? <Error error={error} /> : ''}
+                { error && <Error error={error} /> }
                 <div className="main-container2 lg:w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Login</h1> 
                 <div className="mt-4">
@@ -61,7 +53,7 @@ const Page = () => {
                     }}
                     validationSchema={LoginSchema}
                     onSubmit={value=>{
-                        login(value.email, value.password)
+                        loginUser(value.email, value.password)
                     }}
                     >
                         {({ errors, touched, isSubmitting }) => (

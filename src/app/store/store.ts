@@ -9,6 +9,7 @@ import {
 } from '@reduxjs/toolkit'
 import { appointmentSlice } from './appointment/appointmentSlice'
 import { userSlice } from './user/userSlice'
+import { authSlice } from './auth/authSlice'
 
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,
@@ -17,7 +18,8 @@ const listenerMiddlewareInstance = createListenerMiddleware({
 const store = configureStore({
   reducer: {
     appointments: appointmentSlice.reducer,
-    user: userSlice.reducer
+    user: userSlice.reducer,
+    auth: authSlice.reducer,
   },
   // devTools: process.env.NODE_ENV !== "production",
   middleware: (gDM) => gDM().concat().prepend(listenerMiddlewareInstance.middleware),

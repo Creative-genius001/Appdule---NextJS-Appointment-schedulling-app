@@ -9,7 +9,7 @@ import { AppointmentData, data } from '@/app/_data/data'
 import CreateAppointment from '../../_components/createAppointment'
 import { createAppointment, getAppointments, getUpcomingAppointment } from '@/app/_services/appointment.service'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/app/store/store'
+import { RootState, useAppDispatch } from '@/app/store/store'
 import { DocumentData } from 'firebase/firestore'
 import { AppointmentModel } from '@/app/models/appointment.model'
 import routeGuard from '@/app/_guard/routeGuard'
@@ -29,7 +29,7 @@ function Page() {
   const [createBtn, setCreateBtn] = React.useState<boolean>(false)
   const [open, setOpen] = React.useState<boolean>(false)
   const [data, setData] = React.useState<any>([])
-  // const data: any = []
+  const dispatch = useAppDispatch();
   const showCreateAppt = () => {
     setCreateBtn(!createBtn)
   }
@@ -62,13 +62,8 @@ function Page() {
       const uid = (JSON.parse(store)).user_id
 
       const res = await getUpcomingAppointment(uid)
-      res.forEach((doc) => {
-        setData(doc.data())
-        console.log(data)
-        // console.log(data)
-      });
+      setData(res)
     }
-
     fetchUpcomingAppointments();
   },[])
 
@@ -85,9 +80,9 @@ function Page() {
       <div className='main-card w-full h-auto bg-[#ffffff] mt-8 rounded-[6px] lg:p-8 sm:px-4 sm:py-8'>
         <h1 className='lg:text-2xl sm:text-lg font-medium'>Upcomming Appointments</h1>
 
-        {/* <div className='appt-container'>
+        <div className='appt-container'>
           <Table data={data}/>
-        </div> */}
+        </div>
       </div>
 
       </div>
