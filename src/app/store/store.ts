@@ -6,26 +6,40 @@ import {
   TypedAddListener,
   ListenerEffectAPI,
   addListener,
+  combineReducers,
 } from '@reduxjs/toolkit'
 import { appointmentSlice } from './appointment/appointmentSlice'
 import { userSlice } from './user/userSlice'
 import { authSlice } from './auth/authSlice'
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,
 })
 
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const rootReducer = combineReducers({
+  auth: authSlice.reducer,           
+  user: userSlice.reducer, 
+  appointments: appointmentSlice.reducer,  
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 const store = configureStore({
-  reducer: {
-    appointments: appointmentSlice.reducer,
-    user: userSlice.reducer,
-    auth: authSlice.reducer,
-  },
+  reducer: persistedReducer,
   // devTools: process.env.NODE_ENV !== "production",
   middleware: (gDM) => gDM().concat().prepend(listenerMiddlewareInstance.middleware),
 })
 
-export { store }
+const persistor = persistStore(store)
+
+export { store, persistor }
 
 
 export type RootState = ReturnType<typeof store.getState>

@@ -1,10 +1,12 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as Auth from '@/app/_services/auth.service'
 import handleError from "@/app/utils/errorhandler";
+import { createUser } from "@/app/_services/user.service";
 
 
 export interface AuthState {
   authToken: string | null;
+  status: boolean,
   uid: string | null,
   loading: boolean;
   error: string
@@ -13,6 +15,7 @@ export interface AuthState {
 
 const initalState: AuthState = {
   authToken: null,
+  status: false,
   uid: null,
   loading: false,
   error: "",
@@ -25,11 +28,23 @@ export const authSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
+     builder.addCase(register.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(register.fulfilled, (state) => {
+      state.loading = false;
+      state.status = true;
+    });
+    builder.addCase(register.rejected, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
     builder.addCase(login.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
       state.loading = false;
+      state.status = true;
       state.authToken = action.payload.accessToken;
       state.uid = action.payload.uid;
     });
@@ -54,6 +69,31 @@ export const login = createAsyncThunk(
             uid,
             accessToken
         };
+    } catch (error: any) {
+        const errorMessgae = handleError(error)
+        return thunkAPI.rejectWithValue(errorMessgae);
+    }
+  }
+);
+
+export const register = createAsyncThunk(
+  "auth-register",
+  async (formData: {email: string, password: string, firstName: string, lastName: string}, thunkAPI) => {
+    try {
+        const response = await Auth.Signup(formData.email, formData.password)
+        if(!response){
+            return thunkAPI.rejectWithValue("Unknown error occurred");
+        }
+        const User = {
+            user_id: response.user.uid,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: response.user.email,
+            updatedAt: new Date().toISOString(),
+            createdAt: new Date().toISOString()
+        }
+        await createUser(User)
+        return;
     } catch (error: any) {
         const errorMessgae = handleError(error)
         return thunkAPI.rejectWithValue(errorMessgae);

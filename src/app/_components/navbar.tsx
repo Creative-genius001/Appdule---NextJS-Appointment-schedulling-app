@@ -2,37 +2,34 @@
 
 import React, { useEffect, useState } from 'react'
 import '../styles/navbar.css'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FiBell } from 'react-icons/fi'
 import { IoIosArrowDown } from 'react-icons/io'
-import { PiCalendarBlank } from 'react-icons/pi'
-import { RiHomeLine } from 'react-icons/ri'
-import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5'
+import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import MobileNav from './mobileNav'
 import DesktopNav from './desktopNav'
 import { User } from '../models/user.model'
+import { RootState } from '../store/store'
 
 function Navbar() {
 
-    const pathname = usePathname()
+    const { user } = useSelector((state: RootState) => state.user);
     const router = useRouter();
     const[dropDown, setDropDown] = useState<boolean>(false);
     const[width, setWidth] = useState<number>(0);
-    const[user, setUser] = useState<User | undefined>(undefined);
     const[shortUsername, setShortUsername] = useState<string>('')
 
     useEffect(()=> {
-
-        const res: any = localStorage.getItem("utk");
-        if(res != null){
-            const User : User = JSON.parse(res);
-            setUser(User)
+        if(user != null){
+            const User = user as User
             const shortName = User.firstName.charAt(0) + User.lastName.charAt(0)
             setShortUsername(shortName.toUpperCase());
         }
 
+    },[user])
+
+    useEffect(()=>{
         function checkWindowWidth() {
             const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             setWidth(windowWidth)
@@ -44,8 +41,7 @@ function Navbar() {
         return () => {
             window.removeEventListener('click', checkWindowWidth);
         };
-
-    },[])
+    })
 
     function closeDropDown(){
         setDropDown(false)

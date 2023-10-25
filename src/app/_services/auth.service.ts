@@ -12,22 +12,17 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
 
-async function Signup(email: string, password: string, firstName: string, lastName: string){
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(res)
-    if(!res){
-        return false;
+async function Signup(email: string, password: string){
+    try {
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        if(!res){
+            return;
+        }
+        return res;
+        
+    } catch (error: any) {
+        throw error.message;
     }
-    const User = {
-        user_id: res.user.uid,
-        firstName,
-        lastName,
-        email: res.user.email,
-        updatedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString()
-    }
-    await createUser(User)
-    return true;
 }
 
 async function Login(email: string, password: string): Promise<{uid: string, accessToken: string} | undefined>{
@@ -39,7 +34,6 @@ async function Login(email: string, password: string): Promise<{uid: string, acc
         const accessToken =  await res.user.getIdToken();
         const uid = res.user.uid;
         localStorage.setItem('atk', accessToken);
-        localStorage.setItem('utk', uid);
         return ({
             uid,
             accessToken

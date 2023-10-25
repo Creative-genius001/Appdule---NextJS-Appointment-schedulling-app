@@ -8,16 +8,14 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import '../../styles/auth.css'
 import Error from "@/app/_components/error";
-import { useAppDispatch } from "@/app/store/store";
-import { fetchUser } from "@/app/store/user/userAction";
-import handleError from "@/app/utils/errorhandler";
+import { RootState, useAppDispatch } from "@/app/store/store";
 import { login } from "@/app/store/auth/authSlice";
 import { useSelector } from "react-redux";
+import BtnLoader from "@/app/_components/BtnLoader";
 
 
 const Page = () => {
-    const { error, loading } = useSelector((state: any) => state.auth);
-    console.log(error)
+    const { error, loading, status } = useSelector((state: RootState) => state.auth);
     const router = useRouter();
     const dispatch = useAppDispatch();
 
@@ -27,6 +25,12 @@ const Page = () => {
             router.push('/home')
         }
     },)
+
+    useEffect(() => {
+    if (status == true) {
+      router.push("/home");
+    }
+    }, [router, dispatch, status]);
 
 
     const LoginSchema = Yup.object().shape({
@@ -69,7 +73,7 @@ const Page = () => {
                             {errors.password && touched.password ? (<span className="text-[#ec4242] text-sm mt-1">{errors.password}</span>) : null}
                         </div>
                         <Link href={"/forgot-password"}><p className="font-medium text-lightblue text-right mt-2">Forgot Password?</p></Link>
-                        <button className="button" type="submit" disabled={isSubmitting}>Login</button>
+                        <button className={loading ? 'button-disabled' : 'button'} type="submit" disabled={loading}>{ loading ? <BtnLoader /> : 'Login' }</button>
                     </Form>
                         )}
                     </Formik>

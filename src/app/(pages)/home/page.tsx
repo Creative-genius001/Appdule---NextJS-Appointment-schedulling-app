@@ -14,6 +14,7 @@ import { DocumentData } from 'firebase/firestore'
 import { AppointmentModel } from '@/app/models/appointment.model'
 import routeGuard from '@/app/_guard/routeGuard'
 import SnackBar from '@/app/_components/snackBar'
+import { fetchUser } from '@/app/store/user/userSlice'
 
 
 function Page() {
@@ -26,6 +27,8 @@ function Page() {
     description: string;
   }
 
+  const { user } = useSelector((state: RootState) => state.user);
+  const { uid } = useSelector((state: RootState) => state.auth);
   const [createBtn, setCreateBtn] = React.useState<boolean>(false)
   const [open, setOpen] = React.useState<boolean>(false)
   const [data, setData] = React.useState<any>([])
@@ -58,14 +61,21 @@ function Page() {
 
   React.useEffect(()=>{
     const fetchUpcomingAppointments = async()=> {
-      const store: any = localStorage.getItem('utk');
-      const uid = (JSON.parse(store)).user_id
-
-      const res = await getUpcomingAppointment(uid)
-      setData(res)
+      if(uid){
+        const res = await getUpcomingAppointment(uid)
+        setData(res) 
+      }
     }
     fetchUpcomingAppointments();
-  },[])
+  },[data, uid])
+
+  React.useEffect(()=>{
+    if(!user){
+      if(uid){
+        dispatch(fetchUser(uid))
+      }
+    }
+  },[dispatch, uid, user])
 
   return (
     <>

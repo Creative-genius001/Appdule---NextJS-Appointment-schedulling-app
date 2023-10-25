@@ -1,15 +1,16 @@
 'use client';
 
-import Image from "next/image";
+import { useEffect } from "react";
 import Link from "next/link";
-import { ChangeEvent, FormEvent, useState } from "react";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import '../../styles/auth.css'
-import { Signup } from "@/app/_services/auth.service";
+import { register } from "@/app/store/auth/authSlice";
 import { useRouter } from "next/navigation";
-import { schema } from "@/app/utils/validateAppointmentInput";
-
+import BtnLoader from "@/app/_components/BtnLoader";
+import Error from "@/app/_components/error";
+import { RootState, useAppDispatch } from "@/app/store/store";
+import { useSelector } from "react-redux";
 
 export interface SignupProp {
     firstName: string,
@@ -21,7 +22,15 @@ export interface SignupProp {
 
 const Page = () => {
     const router = useRouter()
-    const [error, setError] = useState<string>('');
+    const dispatch = useAppDispatch()
+    const { error, loading, status } = useSelector((state: RootState) => state.auth);
+
+
+    useEffect(() => {
+    if (status == true) {
+      router.push("/auth/login");
+    }
+    }, [router, dispatch, status]);
 
     let SignupSchema = Yup.object().shape({
         firstName: Yup.string().required('Required!'),
@@ -33,20 +42,17 @@ const Page = () => {
 
 
     const handleSubmit = async(value: SignupProp) =>{
-        await Signup(value.email, value.password, value.firstName, value.lastName);
+        const {email, password, firstName, lastName} = value;
+        dispatch(register({email, password, firstName, lastName}));
     }
    
     return ( 
         <>
         <div className='hero-section'>
-            {/* <div className= "hero-img w-[45%] h-[100vh] rounded-lg bg-[#772929] ">
-                <Image alt="frontimage" src={doc} className="img w-[100%] h-[100%] object-contain rounded-lg "/>
-            </div> */}
             <div className="main-container md:w-[55%] sm:w-screen h-[100vh] flex flex-col justify-center items-center bg-[white] ">
-                
+                { error && <Error error={error} /> }
                 <div className="main-container2 lg:w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Signup</h1> 
-                    {/* <p className="text-[1rem] text-dark ">Please enter your details to login.</p>   */}
                 <div className="mt-4">
                     <Formik
                         initialValues={{
@@ -84,7 +90,7 @@ const Page = () => {
                             <Field name="password" type="password" placeholder="Password" />
                             {errors.password && touched.password ? (<span className="text-[#ec4242] text-sm mt-1">{errors.password}</span>) : null}
                         </div>
-                        <button className="button" type="submit" disabled={isSubmitting}>Signup</button>
+                        <button className={loading ? 'button-disabled' : 'button'} type="submit" disabled={loading}>{ loading ? <BtnLoader /> : 'Signup' }</button>
                     </Form>
                         )}
                     </Formik>
