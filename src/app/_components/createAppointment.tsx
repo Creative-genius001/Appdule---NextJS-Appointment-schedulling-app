@@ -6,23 +6,16 @@ import Datepicker from './datepicker'
 import { MdOutlineCancel } from 'react-icons/md'
 import Timepicker from './timepicker'
 import { User } from '../models/user.model'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/store'
 
 function CreateAppointment(props: any) {
 
+    const { uid } = useSelector((state: RootState) => state.auth);
     const[title, setTitle] = React.useState<string>('')
-    const[uid, setUid] = React.useState<string>('')
     const[time, setTime] = React.useState<string>('')
     const[date, setDate] = React.useState<string>('')
     const[description, setDescription] = React.useState<string>('')
-
-    useEffect(()=> {
-        const res: any = localStorage.getItem("utk");
-        if(res != null){
-            const User : User = JSON.parse(res);
-            setUid(User.user_id)
-        }
-
-    },[])
 
     const getTime = (time: string) =>{
         setTime(time)

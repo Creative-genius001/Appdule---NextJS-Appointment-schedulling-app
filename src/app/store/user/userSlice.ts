@@ -25,7 +25,7 @@ export const userSlice = createSlice({
       builder.addCase(fetchUser.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
+    builder.addCase(fetchUser.fulfilled, (state, action: PayloadAction<any>) => {
       state.user = action.payload,
       state.isLoading = false,
       state.error = ''
@@ -38,19 +38,12 @@ export const userSlice = createSlice({
 })
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async(uid: string, thunkAPI) =>{
-  const user = localStorage.getItem('utk')
-  if(!user){
-    try {
+  try {
     const response = await getUserData(uid)
-    localStorage.setItem('utk', JSON.stringify(response));
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue('error in fetching user')
   }  
-  }
-  const USER = JSON.parse(user)
-  return USER;
- 
 })
 
 export default userSlice.reducer

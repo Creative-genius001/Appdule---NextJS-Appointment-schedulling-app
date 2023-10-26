@@ -15,18 +15,17 @@ import { AppointmentModel } from '@/app/models/appointment.model';
 const Page = () => {
   const[data, setData] = React.useState<AppointmentModel[]>([])
   const[loading, setLoading] = React.useState<boolean>(true)
-
+  const { uid } = useSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
-  
-  // const data = useSelector((state: RootState) => state.appointments.appointment);
 
   React.useEffect(()=>{
 
-    const fetchAppointmentData = async()=> {
-      const store: any = localStorage.getItem('utk');
-      const uid = (JSON.parse(store)).user_id
-
-      const res = await getAppointments(uid);
+  const fetchAppointmentData = async()=> {
+    if(!uid){
+      console.error('An error occured while fetching uid')
+      return
+    }
+    const res = await getAppointments(uid);
       if(res?.length === 0){
         setLoading(false)
       }

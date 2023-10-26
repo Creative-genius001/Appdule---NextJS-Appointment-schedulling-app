@@ -1,12 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebase";
-import handleError from "../utils/errorhandler";
-import { User } from "../models/user.model";
-import { getUserData, createUser } from "./user.service";
-import { DocumentData } from "firebase/firestore";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import { redirect } from "next/navigation";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
@@ -60,7 +55,6 @@ function checkUserLoggedIn(){
 async function Logout(){
     await signOut(auth)
     localStorage.removeItem('atk')
-    localStorage.removeItem('utk')
 }
 
 
