@@ -25,7 +25,14 @@ const initalState: AuthState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState: initalState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.authToken = null,
+      state.status = false,
+      state.uid = null,
+      state.error = ''
+    },
+  },
 
   extraReducers: (builder) => {
      builder.addCase(register.pending, (state) => {
@@ -93,12 +100,14 @@ export const register = createAsyncThunk(
             createdAt: new Date().toISOString()
         }
         await createUser(User)
-        return;
+        return null;
     } catch (error: any) {
         const errorMessgae = handleError(error)
         return thunkAPI.rejectWithValue(errorMessgae);
     }
   }
 );
+
+export const { reset } = authSlice.actions;
 
 export default authSlice.reducer;

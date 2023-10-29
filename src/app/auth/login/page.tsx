@@ -32,6 +32,10 @@ const Page = () => {
     }
     }, [router, dispatch, status]);
 
+    if(status == true){
+        router.push('/home')
+    }
+
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string().required('Email is required').email('Invalid Email'),

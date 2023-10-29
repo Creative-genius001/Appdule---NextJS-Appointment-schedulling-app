@@ -11,12 +11,16 @@ import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5'
 import { useRouter, usePathname } from 'next/navigation'
 import '@/app/styles/navbar.css'
 import { Logout } from '../_services/auth.service'
+import { useAppDispatch } from '../store/store'
+import { reset } from '../store/auth/authSlice'
+import { resetUser } from '../store/user/userSlice'
 
 
 function MobileNav(props: any) {
 
   const pathname = usePathname()
   const router = useRouter();
+  const dispatch = useAppDispatch();
   return (
     <div className='bg-[white] w-screen h-screen absolute top-0 left-0 p-6 flex flex-col justify-start'>
                     <div className='mb-6 flex justify-between items-center'>
@@ -57,6 +61,8 @@ function MobileNav(props: any) {
                             </li>
                             <li  onClick={()=>{
                                 Logout()
+                                dispatch(reset())
+                                dispatch(resetUser())
                                 router.push('auth/login')
                             }}>
                                 <div id='link'>

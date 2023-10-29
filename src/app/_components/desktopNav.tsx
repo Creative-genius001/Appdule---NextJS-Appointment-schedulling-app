@@ -11,11 +11,15 @@ import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5'
 import { useRouter, usePathname } from 'next/navigation'
 import '@/app/styles/navbar.css'
 import { Logout } from '../_services/auth.service'
+import { useAppDispatch } from '../store/store'
+import { reset } from '../store/auth/authSlice'
+import { resetUser } from '../store/user/userSlice'
 
 function DesktopNav(props: any) {
 
     const pathname = usePathname()
     const router = useRouter();
+    const dispatch= useAppDispatch();
 
   return (
     <div className='drop-down bg-[white] w-[400px] h-[350px] rounded-[12px] absolute top-24 right-16 p-6 flex flex-col justify-start'>
@@ -50,6 +54,8 @@ function DesktopNav(props: any) {
                             </li>
                             <li onClick={()=>{
                                 Logout()
+                                dispatch(reset())
+                                dispatch(resetUser())
                                 router.push('auth/login')
                             }}>
                                 <div id='link'>
