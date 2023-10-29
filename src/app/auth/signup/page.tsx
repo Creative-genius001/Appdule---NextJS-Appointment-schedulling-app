@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import '../../styles/auth.css'
 import { register } from "@/app/store/auth/authSlice";
 import { useRouter } from "next/navigation";
-import BtnLoader from "@/app/_components/BtnLoader";
+import BtnLoader from "@/app/_components/btnLoader";
 import Error from "@/app/_components/error";
 import { RootState, useAppDispatch } from "@/app/store/store";
 import { useSelector } from "react-redux";

@@ -11,7 +11,7 @@ import Error from "@/app/_components/error";
 import { RootState, useAppDispatch } from "@/app/store/store";
 import { login } from "@/app/store/auth/authSlice";
 import { useSelector } from "react-redux";
-import BtnLoader from "@/app/_components/BtnLoader";
+import BtnLoader from "@/app/_components/btnLoader";
 
 
 const Page = () => {
