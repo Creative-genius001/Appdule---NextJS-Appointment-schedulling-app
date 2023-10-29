@@ -1,6 +1,23 @@
+'use client'
+
 import Image from 'next/image'
+import { useEffect } from 'react'
+import { checkUserLoggedIn } from './_services/auth.service'
+import { useRouter } from 'next/navigation'
+
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(()=>{
+    const isAuthenticated = checkUserLoggedIn();
+    if(isAuthenticated){
+      router.push('/home')
+    }
+    else{
+      router.push('/auth/login')
+    }
+  })
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
