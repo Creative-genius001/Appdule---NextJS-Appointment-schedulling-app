@@ -13,7 +13,6 @@ import '@/app/styles/navbar.css'
 import { Logout } from '../services/auth.service'
 import { useAppDispatch } from '../store/store'
 import { reset } from '../store/auth/authSlice'
-import { resetUser } from '../store/user/userSlice'
 
 function DesktopNav(props: any) {
 
@@ -55,7 +54,6 @@ function DesktopNav(props: any) {
                             <li onClick={()=>{
                                 Logout()
                                 dispatch(reset())
-                                dispatch(resetUser())
                                 router.push('auth/login')
                             }}>
                                 <div id='link'>

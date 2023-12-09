@@ -8,6 +8,7 @@ import Timepicker from './timepicker'
 import { User } from '../models/user.model'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/store'
+import dayjs, { Dayjs } from 'dayjs';
 
 function CreateAppointment(props: any) {
 
@@ -15,14 +16,10 @@ function CreateAppointment(props: any) {
     const[title, setTitle] = React.useState<string>('')
     const[time, setTime] = React.useState<string>('')
     const[date, setDate] = React.useState<string>('')
-    const[selectDate, setSelectDate] = React.useState<boolean>(false)
     const[description, setDescription] = React.useState<string>('')
 
-    const getTime = (time: string) =>{
-        setTime(time)
-    }
-    const getDate = (date: string) =>{
-        setDate(date)
+    const getDateAndTime = (data: any) => {
+        console.log(data)
     }
 
     const handleSubmit = async(e: FormEvent<HTMLFormElement>) =>{
@@ -53,7 +50,7 @@ function CreateAppointment(props: any) {
                 </div>
                 <div className="flex flex-col mt-3"> 
                     <label className="text-[0.9rem] font-medium mb-1 ">Date</label>
-                    <Datepicker getDate={getDate} /> 
+                    <Datepicker getDateAndTime={getDateAndTime} /> 
                 </div>
                 {/* <div className="flex flex-col mt-3">
                     <label className="text-[0.9rem] font-medium mb-1 ">Time</label>

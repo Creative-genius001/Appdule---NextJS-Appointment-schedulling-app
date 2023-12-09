@@ -62,7 +62,6 @@ function MobileNav(props: any) {
                             <li  onClick={()=>{
                                 Logout()
                                 dispatch(reset())
-                                dispatch(resetUser())
                                 router.push('auth/login')
                             }}>
                                 <div id='link'>
