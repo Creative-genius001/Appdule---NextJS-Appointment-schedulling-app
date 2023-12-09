@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { DocumentData } from 'firebase/firestore'
-import { getUserData } from '@/app/_services/user.service';
+import { getUserData } from '@/app/services/user.service';
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
 

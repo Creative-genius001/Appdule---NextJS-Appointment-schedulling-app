@@ -15,6 +15,7 @@ function CreateAppointment(props: any) {
     const[title, setTitle] = React.useState<string>('')
     const[time, setTime] = React.useState<string>('')
     const[date, setDate] = React.useState<string>('')
+    const[selectDate, setSelectDate] = React.useState<boolean>(false)
     const[description, setDescription] = React.useState<string>('')
 
     const getTime = (time: string) =>{
@@ -50,14 +51,14 @@ function CreateAppointment(props: any) {
                     <label className="text-[0.9rem] font-medium mb-1 ">Title</label>
                     <input onChange={(e)=> setTitle(e.target.value)} type="text" placeholder="e.g Fever Symptoms" required/>
                 </div>
-                <div className="flex flex-col mt-3">
+                <div className="flex flex-col mt-3"> 
                     <label className="text-[0.9rem] font-medium mb-1 ">Date</label>
-                    <Datepicker getDate={getDate} />
+                    <Datepicker getDate={getDate} /> 
                 </div>
-                <div className="flex flex-col mt-3">
+                {/* <div className="flex flex-col mt-3">
                     <label className="text-[0.9rem] font-medium mb-1 ">Time</label>
                     <Timepicker getTime={getTime} />
-                </div>
+                </div> */}
                 <div className="flex flex-col mt-3">
                     <label className="text-[0.9rem] font-medium mb-1 ">Description</label>
                     <textarea onChange={(e)=> setDescription(e.target.value)} className='text-area' placeholder='minimum of 100 words' required></textarea>

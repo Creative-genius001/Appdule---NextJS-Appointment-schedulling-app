@@ -1,6 +1,6 @@
 import { redirect, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
-import { checkUserLoggedIn } from '../_services/auth.service';
+import { checkUserLoggedIn } from '../services/auth.service';
 
 
 export default function routeGuard(Component: any) {

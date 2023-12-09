@@ -21,7 +21,6 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: yellow;
   width: 100vw;
 }
 
@@ -29,7 +28,7 @@ body {
 
   .main{
     height: 100vh;
-    background-color: #0895a3;
+    /* background-color: #0895a3; */
     width: 100vw;
   }
 

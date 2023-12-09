@@ -5,7 +5,6 @@ import { DocumentData } from 'firebase/firestore';
 
 
 const Table: React.FC<DocumentData> = ({data}): JSX.Element  => {
-    console.log(data)
 
     return ( 
         <>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Login, checkUserLoggedIn } from "@/app/_services/auth.service";
+import { Login, checkUserLoggedIn } from "@/app/services/auth.service";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import '../../styles/auth.css'

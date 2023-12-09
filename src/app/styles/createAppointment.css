@@ -5,11 +5,10 @@ Input{
     outline: none;
     padding: 27px 12px;
     font-size: 1rem;
-    border-radius: 7px;
-    border:1px solid rgb(185, 185, 185);
+    border-radius: 5px;
 }
 
-Input,.text-area:focus{
+.text-area:focus{
     border: 2px solid #26aca767;
     outline: none;
     appearance: none;

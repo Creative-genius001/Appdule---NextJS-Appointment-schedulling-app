@@ -7,6 +7,8 @@ import {
   ListenerEffectAPI,
   addListener,
   combineReducers,
+  Reducer,
+  AnyAction,
 } from '@reduxjs/toolkit'
 import { appointmentSlice } from './appointment/appointmentSlice'
 import { userSlice } from './user/userSlice'
@@ -23,11 +25,21 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   auth: authSlice.reducer,           
   user: userSlice.reducer, 
   appointments: appointmentSlice.reducer,  
 });
+
+const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
+  if (action.type === 'auth/reset') {
+
+    storage.removeItem('persist:root')
+
+    state = {} as RootState
+  }
+  return appReducer(state, action)
+}
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
