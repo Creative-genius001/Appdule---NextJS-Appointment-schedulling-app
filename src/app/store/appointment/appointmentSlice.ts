@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 import { AppointmentModel } from '@/app/models/appointment.model'
-import { fetchAppointments } from './appointmentActions'
+import { createAppointmentEffect, fetchAppointments } from './appointmentActions'
 
 
 interface AppointmentState {
@@ -33,7 +33,19 @@ export const appointmentSlice = createSlice({
     [fetchAppointments.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false,
       state.error = action.payload 
-    }
+    },
+    [createAppointmentEffect.fulfilled.type]: (state) => {
+      state.isLoading = false,
+      state.error = '' 
+    },
+    [createAppointmentEffect.pending.type]: (state) => {
+      state.isLoading = true,
+      state.error = '' 
+    },
+    [createAppointmentEffect.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false,
+      state.error = action.payload 
+    },
   }
 })
 

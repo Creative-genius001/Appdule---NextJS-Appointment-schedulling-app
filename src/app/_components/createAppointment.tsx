@@ -8,6 +8,7 @@ import { User } from '../models/user.model'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/store'
 import dayjs, { Dayjs } from 'dayjs';
+import BtnLoader from './btnLoader'
 
 function CreateAppointment(props: any) {
 
@@ -26,7 +27,7 @@ function CreateAppointment(props: any) {
 
     const handleSubmit = async(e: FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        if(date == null && time == null && title == null) return;
+        if(date === null || time === null || title === null) return;
         const request = {
             user_id: uid,
             title,
@@ -35,7 +36,7 @@ function CreateAppointment(props: any) {
             description
         }
         props.createAppt(request)
-        props.showCreateAppt();  
+        // props.showCreateAppt();  
     }
 
   return (
@@ -59,7 +60,7 @@ function CreateAppointment(props: any) {
                     <label className="text-[0.9rem] font-medium mb-1 ">Description</label>
                     <textarea onChange={(e)=> setDescription(e.target.value)} className='text-area' placeholder='minimum of 100 words' required></textarea>
                 </div>
-                <button className='rounded-[7px] w-full py-3 mt-3 bg-lightblue text-[white] font-medium hover:bg-[#1da5a0] transition-all ease-in-out '>Book Appointment</button>
+                <button className='rounded-[7px] w-full py-3 mt-3 bg-lightblue text-[white] font-medium hover:bg-[#1da5a0] transition-all ease-in-out '>{ props.isLoading ? <BtnLoader /> : 'Book Appointment' }</button>
             </form>
         </div>
     </div>  
