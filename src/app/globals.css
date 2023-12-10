@@ -22,14 +22,15 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
+  overflow: hidden;
 }
 
 @layer components {
 
   .main{
-    height: 100vh;
-    /* background-color: #0895a3; */
-    width: 100vw;
+    height: auto;
+    background-color: #0895a3;
+    width: 100%;
   }
 
   .button {

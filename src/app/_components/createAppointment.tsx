@@ -40,7 +40,7 @@ function CreateAppointment(props: any) {
 
   return (
     <>
-    <div className='absolute w-screen h-screen top-0 left-0 backdrop-brightness-50 bg-white/30 flex justify-center items-center'>
+    <div className='fixed w-screen h-screen top-0 left-0 backdrop-brightness-50 bg-white/30 flex justify-center items-center'>
         <div className='rounded-[10px] bg-[white] sm:px-4 md:px-5 py-8 lg:w-[500px] sm:w-[90%] h-auto text-dark  '>
             <div className='w-full flex justify-between items-center mb-5'>
                 <h1 className=' font-semibold text-2xl'>Create Appointment</h1>
