@@ -19,7 +19,7 @@ function MobileNav(props: any) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   return (
-    <div className='bg-[white] w-screen h-screen absolute top-0 left-0 p-6 flex flex-col justify-start'>
+    <div className='bg-[#ffffff] w-screen h-screen absolute top-0 left-0 p-6 flex flex-col justify-start z-[1000]'>
                     <div className='mb-6 flex justify-between items-center'>
                         <div onClick={() => props.closeDropDown()} className='notification mr-4 rounded-[50%] bg-lightgrey w-12 h-12 flex justify-center items-center cursor-pointer'>
                             <span className='font-medium'>
