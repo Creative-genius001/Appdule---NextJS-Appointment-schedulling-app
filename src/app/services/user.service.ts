@@ -13,7 +13,6 @@ const getUserData = async(uid: string): Promise<DocumentData | undefined> =>{
     if(!docSnap){
         throw new Error('Could not get user data')
     }
-    console.log(docSnap.data())
     return (docSnap.data())
 }
 

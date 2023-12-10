@@ -11,6 +11,8 @@ import routeGuard from '@/app/guard/routeGuard'
 import SnackBar from '@/app/_components/snackBar'
 import { fetchUser } from '@/app/store/user/userSlice'
 import { createAppointmentEffect } from '@/app/store/appointment/appointmentActions'
+import Navbar from '@/app/_components/navbar'
+import { BsFillCalendarMinusFill } from 'react-icons/bs'
 
 
 function Page() {
@@ -78,6 +80,7 @@ function Page() {
   return (
     <>
       <SnackBar msg={'Created Successfully'} open={open} close={handleClose}/>
+      <Navbar />
       <div className='bg-[#fafafa] text-dark w-[100%] pt-8 lg:px-[70px] sm:px-[20px] min-h-screen'>
       { createAppointmentBtn && <CreateAppointment showCreateAppt={showCreateAppointmentComponent} loading={isLoading} createAppt={handleCreateAppointment} /> }
       <div className='main-card w-full h-[250px] bg-[#ffffff] flex flex-col justify-center items-center mt-4 rounded-[6px]'>
@@ -89,7 +92,13 @@ function Page() {
         <h1 className='lg:text-2xl sm:text-lg font-medium'>Upcomming Appointments</h1>
 
         <div className='appt-container'>
-          <Table data={data}/>
+          {(data?.length === 0 ) && (
+            <div className='w-full bg-[white] px-8 py-16 mt-4 flex flex-col justify-center items-center'>
+              <BsFillCalendarMinusFill className="text-[#858585] text-[4rem] " />
+              <p className='mt-3 sm:text-base md:text-xl text-[#858585] text-center leading-snug'>You do not have any upcoming appointments</p>
+            </div>
+          )}
+          { data?.length > 0 && <Table data={data}/>}
         </div>
       </div>
 
