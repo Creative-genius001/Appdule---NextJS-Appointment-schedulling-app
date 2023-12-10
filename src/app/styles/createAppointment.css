@@ -1,11 +1,12 @@
 
-Input{
+input{
     width: 100%;
     height: 46px;
     outline: none;
     padding: 27px 12px;
     font-size: 1rem;
     border-radius: 5px;
+    background-color: rgb(243, 243, 243);
 }
 
 .text-area:focus{

@@ -43,8 +43,8 @@ function CreateAppointment(props: any) {
     <div className='fixed w-screen h-screen top-0 left-0 backdrop-brightness-50 bg-white/30 flex justify-center items-center'>
         <div className='rounded-[10px] bg-[white] sm:px-4 md:px-5 py-8 lg:w-[500px] sm:w-[90%] h-auto text-dark  '>
             <div className='w-full flex justify-between items-center mb-5'>
-                <h1 className=' font-semibold text-2xl'>Create Appointment</h1>
-                <MdOutlineCancel onClick={props.showCreateAppt} className='text-[1.8rem] cursor-pointer opacity-70 ' />
+                <h1 className=' font-semibold sm:text-xl md:text-2xl'>Create Appointment</h1>
+                <MdOutlineCancel onClick={props.showCreateAppt} className='sm:text-[1.4rem] md:text-[1.8rem] cursor-pointer opacity-70 ' />
             </div>
             <form onSubmit={handleSubmit} className='mt-4'>
                 <div className="flex flex-col">
