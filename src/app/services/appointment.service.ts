@@ -59,8 +59,8 @@ async function createAppointment(data: AppointmentRequest){
         await addDoc(collection(db, "appointments"), body)
         return true 
     } catch (error) {
-        console.error('error creating appointment')
-        return false
+        console.error('error creating appointment', error)
+        throw error;
     }
     
        

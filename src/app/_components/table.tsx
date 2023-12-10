@@ -14,6 +14,7 @@ const Table: React.FC<DocumentData> = ({data}): JSX.Element  => {
                         <thead>
                             <tr>
                                 <td>Appointment ID</td>
+                                <td>Title</td>
                                 <td>Date</td>
                                 <td>Time</td>
                                 <td>Status</td>
@@ -26,6 +27,9 @@ const Table: React.FC<DocumentData> = ({data}): JSX.Element  => {
                             <tr key={index}>
                                 <td className="id">
                                     <p>{appt.appointment_id}</p>
+                                </td>
+                                <td className="title">
+                                    <p>{appt.title}</p>
                                 </td>
                                 <td className="date">
                                     <p>{appt.date}</p>
