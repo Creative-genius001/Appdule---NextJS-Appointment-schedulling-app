@@ -3,12 +3,12 @@
 import * as React from 'react'
 import Table from '@/app/_components/table';
 import { useEffect } from 'react';
-import { getAppointments } from '@/app/_services/appointment.service';
+import { getAppointments } from '@/app/services/appointment.service';
 import { BsFillCalendarMinusFill } from 'react-icons/bs'
 import Loader from '@/app/_components/loader';
 import { RootState, useAppDispatch } from '@/app/store/store';
 import { useSelector } from 'react-redux';
-import routeGuard from '@/app/_guard/routeGuard';
+import routeGuard from '@/app/guard/routeGuard';
 import { AppointmentModel } from '@/app/models/appointment.model';
                                                                                                                                                                                                                                                                                                                                        
 

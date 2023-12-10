@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { DocumentData } from 'firebase/firestore'
-import { getUserData } from '@/app/_services/user.service';
+import { getUserData } from '@/app/services/user.service';
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
 
@@ -21,10 +21,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    resetUser: (state) =>{
-      state.user = null,
-      state.error = ''
-    }
+
   },
   extraReducers: (builder) => {
       builder.addCase(fetchUser.pending, (state) => {
@@ -52,5 +49,4 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async(uid: string, t
 })
 
 
-export const { resetUser } = userSlice.actions
 export default userSlice.reducer

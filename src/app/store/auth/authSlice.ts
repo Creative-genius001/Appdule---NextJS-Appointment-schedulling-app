@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import * as Auth from '@/app/_services/auth.service'
+import * as Auth from '@/app/services/auth.service'
 import handleError from "@/app/utils/errorhandler";
-import { createUser } from "@/app/_services/user.service";
+import { createUser } from "@/app/services/user.service";
 
 
 export interface AuthState {
@@ -26,11 +26,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: initalState,
   reducers: {
-    reset: (state) => {
-      state.authToken = null,
-      state.status = false,
-      state.uid = null,
-      state.error = ''
+    reset: () => {
     },
   },
 

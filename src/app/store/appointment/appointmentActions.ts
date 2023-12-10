@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import { getAppointments } from '@/app/_services/appointment.service';
+import { getAppointments } from '@/app/services/appointment.service';
 
 export const fetchAppointments = createAsyncThunk('appointment/fetchAppointments', async(uid: string, thunkAPI) =>{
   try {

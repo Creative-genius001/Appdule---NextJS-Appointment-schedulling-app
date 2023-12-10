@@ -10,10 +10,9 @@ import { HiMiniArrowLeft } from 'react-icons/hi2'
 import { IoSettingsOutline, IoLogOutOutline } from 'react-icons/io5'
 import { useRouter, usePathname } from 'next/navigation'
 import '@/app/styles/navbar.css'
-import { Logout } from '../_services/auth.service'
+import { Logout } from '../services/auth.service'
 import { useAppDispatch } from '../store/store'
 import { reset } from '../store/auth/authSlice'
-import { resetUser } from '../store/user/userSlice'
 
 function DesktopNav(props: any) {
 
@@ -55,7 +54,6 @@ function DesktopNav(props: any) {
                             <li onClick={()=>{
                                 Logout()
                                 dispatch(reset())
-                                dispatch(resetUser())
                                 router.push('auth/login')
                             }}>
                                 <div id='link'>

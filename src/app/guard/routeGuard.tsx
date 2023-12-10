@@ -1,9 +1,11 @@
 import { redirect, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
-import { checkUserLoggedIn } from '../_services/auth.service';
+import { checkUserLoggedIn } from '../services/auth.service';
+
 
 
 export default function routeGuard(Component: any) {
+  
   return (
     function WithAuth(props: any) {
       const isAuthenticated = checkUserLoggedIn()
@@ -11,6 +13,7 @@ export default function routeGuard(Component: any) {
 
       useEffect(() => {
         if (!isAuthenticated) {
+          
           return redirect('/auth/login')
         }
       },)

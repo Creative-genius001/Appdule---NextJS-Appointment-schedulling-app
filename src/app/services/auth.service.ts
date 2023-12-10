@@ -44,9 +44,13 @@ function checkUserLoggedIn(){
     if(!token) return false;
     const decodedToken = jwtDecode<JwtPayload>(token);
     const expirationTime = decodedToken.exp
-    if(!expirationTime) return false;
+    if(!expirationTime){
+        Logout()
+        return false;
+    }
     const currentTime = new Date().getTime()
     if ((expirationTime*1000) < currentTime) {
+        Logout();
         return false;
     };
     return true;
