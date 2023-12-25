@@ -1,16 +1,16 @@
 'use client'
 
 import * as React from 'react'
-import Table from '@/app/_components/table';
+import Table from '@/app/components/table';
 import { useEffect } from 'react';
 import { getAppointments } from '@/app/services/appointment.service';
 import { BsFillCalendarMinusFill } from 'react-icons/bs'
-import Loader from '@/app/_components/loader';
+import Loader from '@/app/components/loader';
 import { RootState, useAppDispatch } from '@/app/store/store';
 import { useSelector } from 'react-redux';
 import routeGuard from '@/app/guard/routeGuard';
 import { AppointmentModel } from '@/app/models/appointment.model';
-import Navbar from '@/app/_components/navbar';
+import Navbar from '@/app/components/navbar';
                                                                                                                                                                                                                                                                                                                                        
 
 const Page = () => {
@@ -42,7 +42,7 @@ const Page = () => {
         <>
             <Navbar />
             <div className='bg-darkSecondary min-h-screen  pt-8 lg:px-[70px] sm:px-[20px] w-screen'>
-              <h1 className='lg:text-2xl sm:text-xl font-medium'>All Appointments</h1>
+              <h1 className='lg:text-[28px] sm:text-xl font-medium'>All Appointments</h1>
                   <div className='appt-container'>
                     {loading ? <Loader /> : ''}
                     {(data?.length === 0 && !loading ) && (

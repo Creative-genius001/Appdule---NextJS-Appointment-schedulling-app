@@ -7,11 +7,11 @@ import { Login, checkUserLoggedIn } from "@/app/services/auth.service";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import '../../styles/auth.css'
-import Error from "@/app/_components/error";
+import Error from "@/app/components/error";
 import { RootState, useAppDispatch } from "@/app/store/store";
 import { login } from "@/app/store/auth/authSlice";
 import { useSelector } from "react-redux";
-import BtnLoader from "@/app/_components/btnLoader";
+import BtnLoader from "@/app/components/btnLoader";
 
 
 const Page = () => {

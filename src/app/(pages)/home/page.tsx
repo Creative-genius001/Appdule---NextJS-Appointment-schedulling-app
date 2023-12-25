@@ -2,16 +2,16 @@
 
 import * as React from 'react'
 import { BiCalendarPlus } from 'react-icons/bi'
-import Table from '@/app/_components/table'
-import CreateAppointment from '../../_components/createAppointment'
+import Table from '@/app/components/table'
+import CreateAppointment from '../../components/createAppointment'
 import { getUpcomingAppointment } from '@/app/services/appointment.service'
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from '@/app/store/store'
 import routeGuard from '@/app/guard/routeGuard'
-import SnackBar from '@/app/_components/snackBar'
+import SnackBar from '@/app/components/snackBar'
 import { fetchUser } from '@/app/store/user/userSlice'
 import { createAppointmentEffect } from '@/app/store/appointment/appointmentActions'
-import Navbar from '@/app/_components/navbar'
+import Navbar from '@/app/components/navbar'
 import { BsFillCalendarMinusFill } from 'react-icons/bs'
 
 
@@ -62,7 +62,7 @@ function Page() {
   React.useEffect(()=>{
     const fetchUpcomingAppointments = async()=> {
       if(uid){
-        const res = await getUpcomingAppointment(uid)
+        const res = await getUpcomingAppointment()
         setData(res) 
       }
     }

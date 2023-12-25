@@ -22,7 +22,7 @@ function CreateAppointment(props: any) {
         const dateFormatted = dayjs(data).format('ddd, MMMM D');
         const timeFormatted = dayjs(data).format('HH:mmA');
         setDate(dateFormatted);
-        setTime(timeFormatted)
+        setTime(timeFormatted)  
     }
 
     const handleSubmit = async(e: FormEvent<HTMLFormElement>) =>{
@@ -35,13 +35,12 @@ function CreateAppointment(props: any) {
             time,
             description
         }
-        props.createAppt(request)
-        // props.showCreateAppt();  
+        props.createAppt(request) 
     }
 
   return (
     <>
-    <div className='fixed w-screen h-screen top-0 left-0 backdrop-brightness-50 bg-white/30 flex justify-center items-center'>
+    <div className='fixed z-[1000] w-screen h-screen top-0 left-0 backdrop-brightness-50 bg-white/30 flex justify-center items-center'>
         <div className='rounded-[10px] bg-[white] sm:px-4 md:px-5 py-8 lg:w-[500px] sm:w-[90%] h-auto text-dark  '>
             <div className='w-full flex justify-between items-center mb-5'>
                 <h1 className=' font-semibold sm:text-xl md:text-2xl'>Create Appointment</h1>

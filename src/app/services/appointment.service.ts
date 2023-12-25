@@ -1,4 +1,4 @@
-import { DocumentData, addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore"
+import { DocumentData, deleteDoc, addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore"
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebase";
 import { AppointmentModel, AppointmentRequest } from "../models/appointment.model";
@@ -23,7 +23,7 @@ async function getAppointments(uid: string): Promise<AppointmentModel[]>{
 }
 
 
-async function getSingleAppointment(uid: string){
+async function getSingleAppointment(uid: string): Promise<unknown>{
     const docRef = doc(db, "appointments", uid);
     const docSnap = await getDoc(docRef);
     if(!docSnap){
@@ -34,7 +34,7 @@ async function getSingleAppointment(uid: string){
 }
 
 
-async function getUpcomingAppointment(uid: string){
+async function getUpcomingAppointment(): Promise<unknown>{
     const U: any = []
     const q = query(collection(db, "appointments"), where("status", "==", 'ACTIVE'));
 
@@ -46,12 +46,12 @@ async function getUpcomingAppointment(uid: string){
 
 }
 
-async function createAppointment(data: AppointmentRequest){
+async function createAppointment(data: AppointmentRequest) : Promise<unknown>{
     const random = generateRandomString(10);
 
     const body: AppointmentModel = {...data,
         appointment_id: random, 
-        status: 'PENDING', 
+        status: 'ACTIVE', 
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString()
     }
@@ -67,8 +67,25 @@ async function createAppointment(data: AppointmentRequest){
 
 }
 
+const deleteAppointment = async(uid: string) :Promise<void> => {
+    let DOC_ID = '';
+    try {
+        const docRef = query(collection(db, "appointments"), where("appointment_id", "==", uid));
+        const querySnapshot = await getDocs(docRef);
+        querySnapshot.forEach((doc) => {
+            DOC_ID = doc.id
+        });
+        await deleteDoc(doc(db, "appointments", DOC_ID));
+        
+    } catch (error) {
+        console.error('Could not delete0',error)
+    }
+    
+}
+
 export {
     getAppointments,
+    deleteAppointment,
     getSingleAppointment,
     createAppointment,
     getUpcomingAppointment
