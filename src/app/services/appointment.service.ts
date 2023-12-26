@@ -17,7 +17,6 @@ async function getAppointments(uid: string): Promise<AppointmentModel[]>{
     querySnapshot.forEach((doc) => {
         appointments.push(doc.data())
     });
-    console.log(appointments)
     return appointments;
     
 }

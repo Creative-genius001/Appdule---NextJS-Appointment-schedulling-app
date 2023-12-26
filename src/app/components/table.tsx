@@ -6,17 +6,19 @@ import { useState } from 'react';
 
 
 
-const Table: React.FC<DocumentData> = ({data}): JSX.Element  => {
+const Table: React.FC<DocumentData> = (props): JSX.Element  => {
 
+    const {data, setFetchData} = props;
     const [confirmDelete, setConfirmDelete] =  useState<boolean>(false)
     const [appointmentID, setAppointmentID] =  useState<string>('')
     const closeDialogue = () =>{
+        setFetchData(true)
         setConfirmDelete(false)
     }
 
     return ( 
         <>
-            <div className="w-full mt-4 bg-[white] rounded-[7px] relative">
+            <div className="w-full mt-4 bg-[#ffffff] rounded-[7px]">
                 <div className="table-container lg:w-[100%] sm:w-full">
                     <table className="">
                         <thead>

@@ -16,6 +16,7 @@ import Navbar from '@/app/components/navbar';
 const Page = () => {
   const[data, setData] = React.useState<AppointmentModel[]>([])
   const[loading, setLoading] = React.useState<boolean>(true)
+  const[fetchData, setFetchData] = React.useState<boolean>(true)
   const { uid } = useSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -26,24 +27,27 @@ const Page = () => {
       console.error('An error occured while fetching uid')
       return
     }
-    const res = await getAppointments(uid);
-      if(res?.length === 0){
+    if(fetchData == true){ 
+      const res = await getAppointments(uid);
+        if(res?.length === 0){
+          setLoading(false)
+        }
         setLoading(false)
+        setData(res)
+        setFetchData(false)
+        // dispatch(fetchAppointments(res));
       }
-      setLoading(false)
-      setData(res)
-      // dispatch(fetchAppointments(res));
     }
 
     fetchAppointmentData();
-  },[])
+  },[uid,fetchData])
 
     return ( 
         <>
             <Navbar />
             <div className='bg-darkSecondary min-h-screen  pt-8 lg:px-[70px] sm:px-[20px] w-screen'>
               <h1 className='lg:text-[28px] sm:text-xl font-medium'>All Appointments</h1>
-                  <div className='appt-container'>
+                  <div className='appt-container  mt-8'>
                     {loading ? <Loader /> : ''}
                     {(data?.length === 0 && !loading ) && (
                       <div className='w-full bg-[white] p-16 mt-4 flex flex-col justify-center items-center'>
@@ -51,7 +55,7 @@ const Page = () => {
                         <p className='mt-3 sm:text-base md:text-xl text-[#858585] text-center leading-snug'>You have not booked any appointment</p>
                       </div>
                     )}
-                    {(data?.length > 0 && !loading ) && <Table data={data}/>}
+                    {(data?.length > 0 && !loading ) && <Table setFetchData={setFetchData} data={data}/>}
                   </div>
             </div>      
         </> 

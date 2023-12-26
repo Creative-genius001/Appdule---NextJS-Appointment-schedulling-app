@@ -29,8 +29,9 @@ function Page() {
   const { error, isLoading } = useSelector((state: RootState) => state.appointments);
   const { uid } = useSelector((state: RootState) => state.auth);
   const [createAppointmentBtn, setCreateAppointmentBtn] = React.useState<boolean>(false)
-  const [open, setOpen] = React.useState<boolean>(false)
+  const [openSnackBar, setOpenSnackBar] = React.useState<boolean>(false)
   const [data, setData] = React.useState<any>([])
+  const[fetchData, setFetchData] = React.useState<boolean>(true)
   const dispatch = useAppDispatch();
   const showCreateAppointmentComponent = () => {
     setCreateAppointmentBtn(!createAppointmentBtn)
@@ -40,7 +41,7 @@ function Page() {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    setOpenSnackBar(false);
   };
 
   const handleCreateAppointment = async(data: AppointmentRequest) => {
@@ -50,7 +51,8 @@ function Page() {
             console.error('error')
             return;
         }
-        setOpen(true)
+        setOpenSnackBar(true)
+        setFetchData(true)
         setCreateAppointmentBtn(false)
     } catch (error) {
         console.error('error')
@@ -60,14 +62,18 @@ function Page() {
 
 
   React.useEffect(()=>{
+
     const fetchUpcomingAppointments = async()=> {
       if(uid){
         const res = await getUpcomingAppointment()
         setData(res) 
+        setFetchData(false);
       }
     }
-    fetchUpcomingAppointments();
-  },[data, uid])
+    if(fetchData){
+      fetchUpcomingAppointments();
+    }
+  },[fetchData, uid])
 
   React.useEffect(()=>{
     if(!user){
@@ -79,7 +85,7 @@ function Page() {
 
   return (
     <>
-      <SnackBar msg={'Created Successfully'} open={open} close={handleClose}/>
+      <SnackBar msg={'Created Successfully'} open={openSnackBar} close={handleClose}/>
       <Navbar />
       <div className='bg-[#fafafa] text-dark w-[100%] pt-8 lg:px-[70px] sm:px-[20px] min-h-screen'>
       { createAppointmentBtn && <CreateAppointment showCreateAppt={showCreateAppointmentComponent} loading={isLoading} createAppt={handleCreateAppointment} /> }
@@ -98,7 +104,7 @@ function Page() {
               <p className='mt-3 sm:text-base md:text-xl text-[#858585] text-center leading-snug'>You do not have any upcoming appointments</p>
             </div>
           )}
-          { data?.length > 0 && <Table data={data}/>}
+          { data?.length > 0 && <Table setFetchData={setFetchData} data={data}/>}
         </div>
       </div>
 
