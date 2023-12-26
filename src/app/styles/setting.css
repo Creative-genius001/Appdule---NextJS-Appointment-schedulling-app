@@ -30,3 +30,9 @@ label{
     color: #121212;
     font-weight: 500;
 }
+
+@media screen and (max-width: 790px) and (min-width: 278px) {
+    input{
+        width: 100%;
+    }
+}

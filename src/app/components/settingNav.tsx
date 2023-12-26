@@ -11,7 +11,7 @@ const pathname = usePathname();
 return (
     <>
             <div className=''>
-                <h1 className='lg:text-[28px] sm:text-xl font-medium'>Settings</h1>
+                <h1 className='lg:text-[28px] sm:text-[24px] font-medium'>Settings</h1>
                 <div className='flex w-full items-center mt-8 link-div'>
                 <Link className={`${pathname === '/settings/profile' ? 'active' : ''}`} href='/settings/profile'>
                     <li className='link-li'>Profile</li>
