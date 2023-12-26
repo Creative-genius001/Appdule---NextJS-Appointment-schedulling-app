@@ -44,13 +44,13 @@ function DesktopNav(props: any) {
                                 </div>
                                 </Link>
                             </li>
-                            {/* <li><Link className={`${pathname === '/settings' ? 'active' : ''}`} href='/settings'>
+                            <li><Link className={`${pathname === '/settings' ? 'active' : ''}`} href='/settings'>
                                 <div id='link'>
                                     <IoSettingsOutline className="text-[1.4rem] "/>
                                     <span>Settings</span>
                                 </div>
                                 </Link>
-                            </li> */}
+                            </li>
                             <li onClick={()=>{
                                 Logout()
                                 dispatch(reset())

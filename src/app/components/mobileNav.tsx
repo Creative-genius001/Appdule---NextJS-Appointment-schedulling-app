@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { PiCalendarBlank } from 'react-icons/pi'
 import { RiHomeLine } from 'react-icons/ri'
 import { HiMiniArrowLeft } from 'react-icons/hi2'
-import { IoLogOutOutline } from 'react-icons/io5'
+import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5'
 import { useRouter, usePathname } from 'next/navigation'
 import '@/app/styles/navbar.css'
 import { Logout } from '../services/auth.service'
@@ -34,7 +34,7 @@ function MobileNav(props: any) {
                     <div>
                          <ul>
                             <li>
-                                <Link className={`${pathname === '/home' ? 'active' : ''}`} href='/home'>
+                               <Link className={`${pathname === '/home' ? 'active' : ''}`} href='/home'>
                                 <div id='link'>
                                     <RiHomeLine className="text-[1.4rem] " />
                                     <span>Home</span>
@@ -49,13 +49,13 @@ function MobileNav(props: any) {
                                 </div>
                                 </Link>
                             </li>
-                            {/* <li><Link className={`${pathname === '/settings' ? 'active' : ''}`} href='/settings'>
+                            <li><Link className={`${pathname === '/settings' ? 'active' : ''}`} href='/settings'>
                                 <div id='link'>
                                     <IoSettingsOutline className="text-[1.4rem] "/>
                                     <span>Settings</span>
                                 </div>
                                 </Link>
-                            </li> */}
+                            </li>
                             <li  onClick={()=>{
                                 Logout()
                                 dispatch(reset())

@@ -1,0 +1,32 @@
+.link-li {
+    font-weight: 600;
+    list-style-type: none;
+    margin-right: 40px;
+    padding: 20px 10px;
+}
+
+.active .link-li{
+    border-bottom: 3px solid #24b7b2;
+    color: #24b7b2;
+}
+
+.link-div{
+    border-bottom: 2px solid rgb(233, 233, 233);
+}
+
+
+input{
+    width: 400px;
+    height: 38px;
+    outline: none;
+    padding: 27px 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid rgb(235, 235, 235);
+    background-color: rgb(255, 255, 255);
+}
+
+label{
+    color: #121212;
+    font-weight: 500;
+}
