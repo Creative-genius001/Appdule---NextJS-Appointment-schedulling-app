@@ -21,12 +21,12 @@ const updateUserDate = () => {
         <Navbar />
         <div className='bg-[#fafafa] text-dark w-[100%] pt-8 lg:px-[70px] sm:px-[20px] min-h-screen'>  
             <SettingNav />
-        <div className='mt-8 link-div pb-4 flex items-center justify-between '>
+        <div className='mt-8 link-div pb-4 flex md:flex-row sm:flex-col items-center justify-between '>
           <div>
-            <h2 className='font-bold text-[20px]  '>Update your password</h2>
+            <h2 className='font-bold sm:text-[18px] md:text-[20px]  '>Update your password</h2>
             <p className='font-medium text-[gray]'>Change your password and confirm via email.</p>
           </div>
-          <button className='flex items-center justify-center rounded-[7px] w-auto py-3 px-12 mt-3 bg-lightblue text-[white] font-medium hover:bg-[#1da5a0] transition-all ease-in-out '><HiOutlineSave className='mr-3 text-[1.3rem] ' />Change</button>
+          <button className='flex items-center justify-center rounded-[7px] sm:w-full md:w-auto py-3 px-12 sm:mt-6 md:mt-0 bg-lightblue text-[white] font-medium hover:bg-[#1da5a0] transition-all ease-in-out '><HiOutlineSave className='mr-3 text-[1.3rem] ' />Change</button>
         </div>
 
         <div className='mt-4'>
