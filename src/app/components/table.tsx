@@ -3,12 +3,14 @@ import { AppointmentModel } from '../models/appointment.model';
 import { DocumentData } from 'firebase/firestore';
 import ConfirmDialogueBox from './confirmDeleteDialogue';
 import { useState } from 'react';
+import SnackBar from '@/app/components/snackBar'
 
 
 
 const Table: React.FC<DocumentData> = (props): JSX.Element  => {
 
     const {data, setFetchData} = props;
+    const [openSnackBar, setOpenSnackBar] = useState<boolean>(false)
     const [confirmDelete, setConfirmDelete] =  useState<boolean>(false)
     const [appointmentID, setAppointmentID] =  useState<string>('')
     const closeDialogue = () =>{

@@ -12,12 +12,15 @@ import { RootState, useAppDispatch } from "@/app/store/store";
 import { login } from "@/app/store/auth/authSlice";
 import { useSelector } from "react-redux";
 import BtnLoader from "@/app/components/btnLoader";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 const Page = () => {
     const { error, loading, status } = useSelector((state: RootState) => state.auth);
     const router = useRouter();
     const dispatch = useAppDispatch();
+
 
     useEffect(()=>{
         const isAuthenticated = checkUserLoggedIn();
@@ -50,7 +53,7 @@ const Page = () => {
         <>
         <div className='hero-section'>
             <div className="main-container md:w-[55%] sm:w-screen  h-[100vh] flex flex-col justify-center items-center bg-[white] ">
-                { error && <Error error={error} /> }
+                { error && toast.error(error, {id: error}) }
                 <div className="main-container2 lg:w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Login</h1> 
                 <div className="mt-4">
