@@ -13,6 +13,7 @@ import { fetchUser } from '@/app/store/user/userSlice'
 import { createAppointmentEffect } from '@/app/store/appointment/appointmentActions'
 import Navbar from '@/app/components/navbar'
 import { BsFillCalendarMinusFill } from 'react-icons/bs'
+import toast from 'react-hot-toast'
 
 
 function Page() {
@@ -29,7 +30,6 @@ function Page() {
   const { error, isLoading } = useSelector((state: RootState) => state.appointments);
   const { uid } = useSelector((state: RootState) => state.auth);
   const [createAppointmentBtn, setCreateAppointmentBtn] = React.useState<boolean>(false)
-  const [openSnackBar, setOpenSnackBar] = React.useState<boolean>(false)
   const [data, setData] = React.useState<any>([])
   const[fetchData, setFetchData] = React.useState<boolean>(true)
   const dispatch = useAppDispatch();
@@ -37,25 +37,15 @@ function Page() {
     setCreateAppointmentBtn(!createAppointmentBtn)
   }
 
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpenSnackBar(false);
-  };
 
   const handleCreateAppointment = async(data: AppointmentRequest) => {
     try {
-      const res = await dispatch(createAppointmentEffect(data));  
-        if(!res){
-            console.error('error')
-            return;
-        }
-        setOpenSnackBar(true)
+        await dispatch(createAppointmentEffect(data));  
+        toast.success('Created successfully!')
         setFetchData(true)
         setCreateAppointmentBtn(false)
     } catch (error) {
-        console.error('error')
+        toast.error('Error creating appointment!')
     }
   }
 
@@ -85,7 +75,6 @@ function Page() {
 
   return (
     <>
-      <SnackBar msg={'Created Successfully'} open={openSnackBar} close={handleClose}/>
       <Navbar />
       <div className='bg-[#fafafa] text-dark w-[100%] pt-8 lg:px-[70px] sm:px-[20px] min-h-screen'>
       { createAppointmentBtn && <CreateAppointment showCreateAppt={showCreateAppointmentComponent} loading={isLoading} createAppt={handleCreateAppointment} /> }

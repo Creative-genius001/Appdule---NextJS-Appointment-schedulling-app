@@ -1,9 +1,18 @@
 import { deleteAppointment } from '../services/appointment.service';
 import {  MdClear } from 'react-icons/md'
+import toast from 'react-hot-toast';
 
 const ConfirmDialogueBox: React.FC<any> = (props) => {
 
     const {closeDialogue} = props;
+    const handleDeleteAppointment = async () =>{
+        try {
+            await deleteAppointment(props.id);
+            toast.success('Successfully cancelled!')
+        } catch (error) {
+            toast.error('Error cancelling appointment!')
+        }
+    }
     
     return (
         <>
@@ -17,7 +26,7 @@ const ConfirmDialogueBox: React.FC<any> = (props) => {
                     <div className='flex w-full gap-4 mt-3'>
                         <button onClick={()=> {
                             closeDialogue();
-                            deleteAppointment(props.id);
+                            handleDeleteAppointment()
                         }} className='bg-[#e64646] hover:bg-[#f35656] transition-all ease-in-out w-full rounded-[6px] md:text-base sm:text-sm p-2 text-[white]'>Cancel</button>
                     </div>
                 </div>
