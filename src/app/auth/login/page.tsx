@@ -9,10 +9,10 @@ import * as Yup from 'yup';
 import '../../styles/auth.css'
 import Error from "@/app/components/error";
 import { RootState, useAppDispatch } from "@/app/store/store";
-import { login } from "@/app/store/auth/authSlice";
+import { login, reset } from "@/app/store/auth/authSlice";
 import { useSelector } from "react-redux";
 import BtnLoader from "@/app/components/btnLoader";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 
 
@@ -39,6 +39,9 @@ const Page = () => {
         router.push('/home')
     }
 
+    if(error){
+        toast.error(error, {id: error});
+    }
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string().required('Email is required').email('Invalid Email'),
@@ -53,7 +56,6 @@ const Page = () => {
         <>
         <div className='hero-section'>
             <div className="main-container md:w-[55%] sm:w-screen  h-[100vh] flex flex-col justify-center items-center bg-[white] ">
-                { error && toast.error(error, {id: error}) }
                 <div className="main-container2 lg:w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Login</h1> 
                 <div className="mt-4">
