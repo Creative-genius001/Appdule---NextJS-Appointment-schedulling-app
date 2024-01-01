@@ -45,7 +45,7 @@ async function getUpcomingAppointment(): Promise<unknown>{
 
 }
 
-async function createAppointment(data: AppointmentRequest) : Promise<unknown>{
+async function createAppointment(data: AppointmentRequest) : Promise<void>{
     const random = generateRandomString(10);
 
     const body: AppointmentModel = {...data,
@@ -56,7 +56,6 @@ async function createAppointment(data: AppointmentRequest) : Promise<unknown>{
     }
     try {
         await addDoc(collection(db, "appointments"), body)
-        return true 
     } catch (error) {
         console.error('error creating appointment', error)
         throw error;
@@ -77,7 +76,7 @@ const deleteAppointment = async(uid: string) :Promise<void> => {
         await deleteDoc(doc(db, "appointments", DOC_ID));
         
     } catch (error) {
-        console.error('Could not delete0',error)
+        throw Error('Error deleting appointment')
     }
     
 }

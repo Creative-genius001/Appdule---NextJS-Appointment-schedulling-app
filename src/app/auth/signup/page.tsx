@@ -11,6 +11,7 @@ import BtnLoader from "@/app/components/btnLoader";
 import Error from "@/app/components/error";
 import { RootState, useAppDispatch } from "@/app/store/store";
 import { useSelector } from "react-redux";
+import toast from 'react-hot-toast';
 
 export interface SignupProp {
     firstName: string,
@@ -39,6 +40,10 @@ const Page = () => {
         password: Yup.string().required().min(8, 'Minimum of 8 characters')
     });
 
+    if(error){
+        toast.error(error, {id: error})
+    }
+
 
 
     const handleSubmit = async(value: SignupProp) =>{
@@ -50,7 +55,6 @@ const Page = () => {
         <>
         <div className='hero-section'>
             <div className="main-container md:w-[55%] sm:w-screen h-[100vh] flex flex-col justify-center items-center bg-[white] ">
-                { error && <Error error={error} /> }
                 <div className="main-container2 lg:w-[50%] sm:w-full mx-auto sm:px-4 md:px-0">
                     <h1 className="font-semibold text-lightblue text-[2rem] mb-0 ">Signup</h1> 
                 <div className="mt-4">
